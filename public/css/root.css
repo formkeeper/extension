@@ -1,3 +1,7 @@
+/*
+    Unlike each component's css in 'src/' this css is not isolated from the web page.
+*/
+
 body {
     margin: 0;
     padding: 0;
