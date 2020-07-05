@@ -1,7 +1,11 @@
 {
-  "name": "my-extension",
+  "name": "formkeeper",
   "version": "0.1.0",
   "private": true,
+  "repository": {
+    "url": "https://github.com/formkeeper/extension.git",
+    "type": "git"
+  },
   "dependencies": {
     "autoprefixer": "7.1.6",
     "babel-core": "6.26.3",
