@@ -1,44 +1,86 @@
 /*global chrome*/
 /* src/content.js */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import Frame, { FrameContextConsumer }from 'react-frame-component';
 import App from "./App";
 
-function Main() {
-  return (
-      <Frame head={[<link type="text/css" rel="stylesheet" href={chrome.runtime.getURL("/static/css/content.css")} ></link>]}>
-         <FrameContextConsumer>
-         {
-            ({document, window}) => {
-              return <App document={document} window={window}/>
+/*
+  useExtensions hook handles extension state in response to background events
+*/
+function useExtension() {
+  const [isVisible, setVisible] = useState(0);
+  const [location, setLocation] = useState(window.location.href);
+
+  useEffect(() => {
+    function handleUrlUpdated(req) {
+      setLocation(req.url);
+    }
+
+    function handleBadgeClicked() {
+      setVisible(!isVisible);
+    }
+
+    function onMessage(req, sender, sendResponse) {
+      const eventToHandler = {
+        "on_badge_click": handleBadgeClicked,
+        "on_url_updated": handleUrlUpdated,
+      }
+      const handler = eventToHandler[req.type];
+      handler.call(this, req, sender, sendResponse);
+    }
+
+    chrome.runtime.onMessage.addListener(onMessage);
+    return function cleanup() {
+      chrome.runtime.onMessage.removeListener(onMessage);
+    }
+  })
+
+  return {
+    isVisible,
+    location
+  }
+}
+
+/*
+  Page is the main component.
+
+  The extension behaviour depends on the context, e.g. whenever a new page is visited (including SPA
+  and server side pages) or a field (textarea, div with contenteditable, inputs...) is focused, this
+  component (and the whole extension, consequently) will be re-rendered.
+*/
+function Page() {
+  const { isVisible, location } = useExtension();
+
+  if (isVisible) {
+    return (
+      <div id="ext-wrapper">
+        <Frame
+          head={[
+            <link
+              key="content"
+              type="text/css"
+              rel="stylesheet"
+              href={chrome.runtime.getURL("/static/css/content.css")}
+            ></link>
+          ]}
+        >
+          <FrameContextConsumer>
+            {
+              ({document, window}) => {
+                return <App document={document} window={window} location={location}/>
+              }
             }
-          }
           </FrameContextConsumer>
-      </Frame>
-  )
+        </Frame>
+      </div>
+    );
+  }
+  return null;
 }
 
 const app = document.createElement('div');
 app.id = "formkeeper-root";
-
 document.body.appendChild(app);
-ReactDOM.render(<Main />, app);
+ReactDOM.render(<Page />, app);
 
-app.style.display = "none";
-
-chrome.runtime.onMessage.addListener(
-   function(request, sender, sendResponse) {
-      if( request.message === "clicked_browser_action") {
-        toggle();
-      }
-   }
-);
-
-function toggle(){
-   if(app.style.display === "none"){
-     app.style.display = "block";
-   }else{
-     app.style.display = "none";
-   }
-}

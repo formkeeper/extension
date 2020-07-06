@@ -1,8 +1,15 @@
-// Called when the user clicks on the browser action
 chrome.browserAction.onClicked.addListener(function(tab) {
-   // Send a message to the active tab
-   chrome.tabs.query({active: true, currentWindow:true},function(tabs) {
-        var activeTab = tabs[0];
-        chrome.tabs.sendMessage(activeTab.id, {"message": "clicked_browser_action"});
-   });
+   chrome.tabs.sendMessage(tab.id, {
+      "type": "on_badge_click"
+    });
+});
+
+chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
+   const url = changeInfo.url;
+   if (url) {
+      chrome.tabs.sendMessage(tabId, {
+         "type": "on_url_updated",
+         url
+      });
+   }
 });
