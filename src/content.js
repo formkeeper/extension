@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import Frame, { FrameContextConsumer }from 'react-frame-component';
-import App from "./App";
+import Sidebar from "./components/sidebar/Sidebar";
 
 /*
   useExtensions hook handles extension state in response to background events
@@ -55,24 +55,26 @@ function Page() {
   if (isVisible) {
     return (
       <div id="ext-wrapper">
-        <Frame
-          head={[
-            <link
-              key="content"
-              type="text/css"
-              rel="stylesheet"
-              href={chrome.runtime.getURL("/static/css/content.css")}
-            ></link>
-          ]}
-        >
-          <FrameContextConsumer>
-            {
-              ({document, window}) => {
-                return <App document={document} window={window} location={location}/>
+        <div className="sidebar-wrapper">
+          <Frame
+            head={[
+              <link
+                key="content"
+                type="text/css"
+                rel="stylesheet"
+                href={chrome.runtime.getURL("/static/css/content.css")}
+              ></link>
+            ]}
+          >
+            <FrameContextConsumer>
+              {
+                ({document, window}) => {
+                  return <Sidebar document={document} window={window} location={location}/>
+                }
               }
-            }
-          </FrameContextConsumer>
-        </Frame>
+            </FrameContextConsumer>
+          </Frame>
+        </div>
       </div>
     );
   }

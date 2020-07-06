@@ -5,21 +5,18 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: sans-serif;
 }
 
-#ext-wrapper {
-    width: 400px;
+.sidebar-wrapper {
+    width: 200px;
     height: 100%;
     position: fixed;
     top: 0px;
-    right: 0px;
-    z-index: 2147483647;
-    background-color: white;
-    box-shadow: 0px 0px 5px #0000009e;
+    left: 0px;
+    z-index: 999999;
 }
 
-#ext-wrapper iframe {
+.sidebar-wrapper iframe {
     width: 100%;
     height: 100%;
     border: none;
