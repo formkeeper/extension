@@ -52,7 +52,7 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "build:dev": "node scripts/build-dev.js",
-    "test": "node scripts/test.js --env=jsdom",
+    "test": "cypress run -b chrome",
     "watch": "npm-watch"
   },
   "watch": {
@@ -115,6 +115,7 @@
     "@typescript-eslint/eslint-plugin": "^2.3.0",
     "@typescript-eslint/parser": "^2.3.0",
     "babel-loader": "^8.0.4",
+    "cypress": "^4.9.0",
     "eslint-plugin-react-hooks": "^2.0.1",
     "mini-css-extract-plugin": "^0.8.0",
     "react-devtools": "^4.7.0",
