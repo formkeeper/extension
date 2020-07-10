@@ -18,18 +18,26 @@ require('../config/env');
 const argv = process.argv;
 const paths = require('../config/paths');
 const cy = require('cypress');
-const bs = require('browser-sync').create();
 
-bs.init({
-  server: paths.testWebsitePublic,
-  port: 3798,
-  open: false,
-})
+// Build dev
+const { buildDev } = require('./build-dev');
 
-if (~argv.indexOf('--interactive')) {
-  cy.open();
-} else {
-  cy.run({
-    browser: "chrome",
+async function run() {
+  await buildDev();
+  const bs = require('browser-sync').create();
+  bs.init({
+    server: paths.testWebsitePublic,
+    port: 3798,
+    open: false,
   })
+
+  if (~argv.indexOf('--interactive')) {
+    cy.open();
+  } else {
+    cy.run({
+      browser: "chrome",
+    })
+  }
 }
+
+run();

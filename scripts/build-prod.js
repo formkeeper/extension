@@ -25,6 +25,7 @@ const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages');
 const printHostingInstructions = require('react-dev-utils/printHostingInstructions');
 const FileSizeReporter = require('react-dev-utils/FileSizeReporter');
 const printBuildError = require('react-dev-utils/printBuildError');
+const { copyPublicFolder, renameManifest } = require('./helpers');
 
 const measureFileSizesBeforeBuild =
   FileSizeReporter.measureFileSizesBeforeBuild;
@@ -49,8 +50,8 @@ measureFileSizesBeforeBuild(paths.appBuild)
     fs.emptyDirSync(paths.appBuild);
     // Merge with the public folder
     copyPublicFolder();
-    // Rename manifest.prod.json to manifest.json
-    fs.rename(paths.manifestBuildProdJson, paths.manifestBuildJson);
+    // Rename .dev and .prod versions of manifest to manifest.json
+    renameManifest();
     // Start the webpack build
     return build(previousFileSizes);
   })
@@ -144,18 +145,3 @@ function build(previousFileSizes) {
   });
 }
 
-function copyPublicFolder() {
-  fs.copySync(paths.appPublic, paths.appBuild, {
-    dereference: true,
-    filter: function copyCurrent(src) {
-      switch(src) {
-        case paths.appHtml:
-          return false;
-        case paths.manifestJson:
-          return false;
-        default:
-          return true;
-      }
-    }
-  });
-}

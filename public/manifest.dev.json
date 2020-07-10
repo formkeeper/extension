@@ -4,7 +4,10 @@
   "version": "0.1",
   "manifest_version": 2,
   "background": {
-    "scripts": ["app/background.js"]
+    "scripts": [
+      "app/background.js",
+      "app/UNSAFE_cy-hook.js"
+    ]
   },
   "browser_action": {},
   "permissions": [
@@ -14,7 +17,10 @@
     {
       "matches": [ "<all_urls>" ],
       "css": ["/css/root.css"],
-      "js": ["/static/js/content.js"],
+      "js": [
+        "/static/js/content.js",
+        "/static/js/UNSAFE_cy-inject.js"
+      ],
       "all_frames": true
     }
   ],
