@@ -52,7 +52,7 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "build:dev": "node scripts/build-dev.js",
-    "cy:serve": "browser-sync start --port 3798 --server cypress/static --no-open",
+    "cy:serve": "browser-sync start --port 3798 --server cypress/fixtures/website_with_fields --no-open",
     "cy": "cypress run -b chrome",
     "cy:interactive": "cypress open",
     "test": "run-p -r cy:serve cy",
