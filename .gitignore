@@ -24,6 +24,7 @@ yarn-error.log*
 # notes
 /notes
 
-# cypress integration test videos
+# cypress
 /cypress/videos
 /cypress/integration/examples
+/cypress/screenshots
