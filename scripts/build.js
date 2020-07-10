@@ -49,6 +49,8 @@ measureFileSizesBeforeBuild(paths.appBuild)
     fs.emptyDirSync(paths.appBuild);
     // Merge with the public folder
     copyPublicFolder();
+    // Rename manifest.prod.json to manifest.json
+    fs.rename(paths.manifestBuildProdJson, paths.manifestBuildJson);
     // Start the webpack build
     return build(previousFileSizes);
   })
@@ -145,6 +147,15 @@ function build(previousFileSizes) {
 function copyPublicFolder() {
   fs.copySync(paths.appPublic, paths.appBuild, {
     dereference: true,
-    filter: file => file !== paths.appHtml,
+    filter: function copyCurrent(src) {
+      switch(src) {
+        case paths.appHtml:
+          return false;
+        case paths.manifestJson:
+          return false;
+        default:
+          return true;
+      }
+    }
   });
 }
