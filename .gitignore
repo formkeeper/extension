@@ -23,3 +23,7 @@ yarn-error.log*
 
 # notes
 /notes
+
+# cypress integration test videos
+/cypress/videos
+/cypress/integration/examples
