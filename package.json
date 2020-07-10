@@ -52,7 +52,11 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "build:dev": "node scripts/build-dev.js",
-    "test": "cypress run -b chrome",
+    "cy:serve": "browser-sync start --port 3798 --server cypress/static --no-open",
+    "cy": "cypress run -b chrome",
+    "cy:interactive": "cypress open",
+    "test": "run-p -r cy:serve cy",
+    "test:interactive": "run-p -r cy:serve cy:interactive",
     "watch": "npm-watch"
   },
   "watch": {
@@ -115,9 +119,11 @@
     "@typescript-eslint/eslint-plugin": "^2.3.0",
     "@typescript-eslint/parser": "^2.3.0",
     "babel-loader": "^8.0.4",
+    "browser-sync": "^2.26.7",
     "cypress": "^4.9.0",
     "eslint-plugin-react-hooks": "^2.0.1",
     "mini-css-extract-plugin": "^0.8.0",
+    "npm-run-all": "^4.1.5",
     "react-devtools": "^4.7.0",
     "webpack": "4.16.5",
     "webpack-cli": "3.1.0"
