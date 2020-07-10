@@ -15,13 +15,21 @@ process.on('unhandledRejection', err => {
 // Ensure environment variables are read.
 require('../config/env');
 
-const jest = require('jest');
-let argv = process.argv.slice(2);
+const argv = process.argv;
+const paths = require('../config/paths');
+const cy = require('cypress');
+const bs = require('browser-sync').create();
 
-// Watch unless on CI or in coverage mode
-if (!process.env.CI && argv.indexOf('--coverage') < 0) {
-  argv.push('--watch');
+bs.init({
+  server: paths.testWebsitePublic,
+  port: 3798,
+  open: false,
+})
+
+if (~argv.indexOf('--interactive')) {
+  cy.open();
+} else {
+  cy.run({
+    browser: "chrome",
+  })
 }
-
-
-jest.run(argv);
