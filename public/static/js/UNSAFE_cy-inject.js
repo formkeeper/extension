@@ -4,3 +4,41 @@
 //
 // If included in production, untrusted websites could have the equivalent privileges of installing an extension,
 // with the same permissions that this one, on the browser of the users of this extension.
+
+const CYCOMMAND = "cy-command";
+const CYRESPONSE = "cy-response";
+const win = window.top;
+
+function send(propertyPath, method, methodType, args) {
+  chrome.runtime.sendMessage({
+    type: CYCOMMAND,
+    target: {
+      propertyPath, method, methodType, args,
+    },
+  }, (response) => {
+    if (!response) {
+      return;
+    }
+
+    if (response.error) {
+      throw new response.error;
+    }
+
+    const noPreferenceTargetOrigin = "*";
+    win.postMessage(response, noPreferenceTargetOrigin);
+  });
+}
+
+function onWinMessage(evt) {
+  if (!evt.data) {
+    return false;
+  }
+
+  if (evt.data.type !== CYCOMMAND) {
+    return false;
+  }
+  const { propertyPath, method, methodType, args } = evt.data.target;
+  send(propertyPath, method, methodType, args);
+}
+
+win.addEventListener("message", onWinMessage);

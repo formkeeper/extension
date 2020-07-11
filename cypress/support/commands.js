@@ -23,3 +23,62 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+
+const CYCOMMAND = "cy-command";
+const CYRESPONSE = "cy-response";
+const METHOD_TYPE = {
+  PROMISE: "method-type-promise",
+  CALLBACK: "method-type-callback",
+}
+const win = window.top;
+
+function listenerWithTimeout([obj, eventName], listener, timeout) {
+  return new Promise((resolve, reject) => {
+    const wrapper = (...args) =>
+      listener.call(this, [resolve, reject], ...args)
+    obj.addEventListener(eventName, wrapper);
+
+    setTimeout(() => {
+      obj.removeEventListener(eventName, wrapper);
+      reject(new Error(`${listener.name}(): Timeout exceeded while awaiting for resolve on ${obj}.on${eventName}`))
+    }, timeout);
+  });
+}
+
+function onResponseListener([resolve, reject], evt) {
+  if (!evt.data) {
+    return false;
+  }
+
+  const { error, type, result } = evt.data;
+  if (type !== CYRESPONSE) {
+    return false;
+  }
+
+  if (error) {
+    reject(error)
+  }
+
+  if (Object.keys(result).length > 0) {
+    resolve(result)
+  }
+  reject(new Error("No result returned"));
+}
+
+Cypress.Commands.add("getLocalExtensionStorage", key => {
+  return new Promise((resolve, reject) => {
+    win.postMessage({
+    type: CYCOMMAND,
+    target: {
+      propertyPath: `storage.local`,
+      method: "get",
+      methodType: METHOD_TYPE.CALLBACK,
+      args: [key],
+      },
+    });
+
+    listenerWithTimeout([win, "message"], onResponseListener, 3e3)
+    .then(result => resolve(result))
+    .catch(reject)
+  });
+})
