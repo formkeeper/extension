@@ -56,13 +56,16 @@ function onResponseListener([resolve, reject], evt) {
   }
 
   if (error) {
-    reject(error)
+    let err = new Error(error.message);
+    err.stack = error.stack;
+    return reject(err)
   }
 
   if (Object.keys(result).length > 0) {
-    resolve(result)
+    Cypress.log(result)
+    return resolve(result)
   }
-  reject(new Error("No result returned"));
+  reject(new Error("No result found for key"));
 }
 
 Cypress.Commands.add("getLocalExtensionStorage", key => {
@@ -70,7 +73,7 @@ Cypress.Commands.add("getLocalExtensionStorage", key => {
     win.postMessage({
     type: CYCOMMAND,
     target: {
-      propertyPath: `storage.local`,
+      propertyPath: "storage.local",
       method: "get",
       methodType: METHOD_TYPE.CALLBACK,
       args: [key],
@@ -81,4 +84,22 @@ Cypress.Commands.add("getLocalExtensionStorage", key => {
     .then(result => resolve(result))
     .catch(reject)
   });
-})
+});
+
+Cypress.Commands.add("setLocalExtensionStorage", (key, value) => {
+  return new Promise((resolve, reject) => {
+    win.postMessage({
+      type: CYCOMMAND,
+      target: {
+        propertyPath: "storage.local",
+        method: "set",
+        methodType: METHOD_TYPE.CALLBACK,
+        args: [key, value],
+      },
+    });
+
+    listenerWithTimeout([win, "message"], onResponseListener, 3e3)
+    .then(result => resolve(result))
+    .catch(reject)
+  });
+});

@@ -20,10 +20,6 @@ function send(propertyPath, method, methodType, args) {
       return;
     }
 
-    if (response.error) {
-      throw new response.error;
-    }
-
     const noPreferenceTargetOrigin = "*";
     win.postMessage(response, noPreferenceTargetOrigin);
   });

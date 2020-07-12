@@ -78,7 +78,10 @@ function onMessage(msg, sender, respond) {
       respond(response);
     })
     .catch(err => {
-      response.error = err;
+      response.error = {
+        message: err.message,
+        stack: err.stack,
+      }
       respond(response);
     });
   // We return true so runtime.onmessage knows that this will be async. We can't use promises
