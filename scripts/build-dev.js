@@ -113,7 +113,7 @@ function buildDev() {
 
 // Create the production build and print the deployment instructions.
 function build(previousFileSizes) {
-  console.log('[!] Creating an development build...');
+  console.log('[!] Creating a development build...');
   let compiler = webpack(config);
   return new Promise((resolve, reject) => {
     compiler.run((err, stats) => {
