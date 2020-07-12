@@ -2,5 +2,6 @@
   "ignoreTestFiles": [
     "**/examples/*.spec.js",
     "**/helpers/*.js"
-  ]
+  ],
+  "defaultCommandTimeout": 10e3
 }
