@@ -33,21 +33,6 @@ function resolveTarget(propPath, top) {
     .reduce((accObj, nextKey) => accObj[nextKey], top);
 }
 
-async function execCommand({target}) {
-  const { propertyPath, method, args } = target;
-  const targetObj = resolveTarget(propertyPath, chrome);
-
-  if (!method) {
-    return targetObj;
-  }
-
-  try {
-    return await targetObj[method].apply(targetObj, args);
-  } catch(err) {
-    throw err;
-  }
-}
-
 function execCommand({target}) {
   const { propertyPath, method, methodType, args } = target;
   const targetObj = resolveTarget(propertyPath, chrome);
