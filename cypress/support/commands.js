@@ -142,6 +142,23 @@ const extensionCommands = {
       onCyResponseCb,
     }
   },
+
+  "clearLocalExtensionStorage": () => {
+    function onCyResponseCb([resolve, reject], evt) {
+      // storage.clear doesn't return results if succeeded so we just resolve (pass test)
+      // if a CYRESPONSE is received.
+      resolve(null);
+    }
+    return {
+      target: {
+        propertyPath: "storage.local",
+        method: "clear",
+        methodType: METHOD_TYPE.CALLBACK,
+        args: [],
+      },
+      onCyResponseCb,
+    }
+  }
 }
 
 Object.keys(extensionCommands).forEach((commandName) => {
