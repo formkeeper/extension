@@ -149,6 +149,7 @@ const extensionCommands = {
       // if a CYRESPONSE is received.
       resolve(null);
     }
+
     return {
       target: {
         propertyPath: "storage.local",
