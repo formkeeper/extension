@@ -9,14 +9,19 @@ const CYCOMMAND = "cy-command";
 const CYRESPONSE = "cy-response";
 const win = window.top;
 
-function send(propertyPath, method, methodType, args) {
+function send(id, propertyPath, method, methodType, args) {
   chrome.runtime.sendMessage({
+    id,
     type: CYCOMMAND,
     target: {
       propertyPath, method, methodType, args,
     },
   }, (response) => {
     if (!response) {
+      return;
+    }
+
+    if (response.skipped) {
       return;
     }
 
@@ -34,7 +39,7 @@ function onWinMessage(evt) {
     return false;
   }
   const { propertyPath, method, methodType, args } = evt.data.target;
-  send(propertyPath, method, methodType, args);
+  send(evt.data.id, propertyPath, method, methodType, args);
 }
 
 win.addEventListener("message", onWinMessage);

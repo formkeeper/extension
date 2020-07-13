@@ -45,33 +45,131 @@ function listenerWithTimeout([obj, eventName], listener, timeout) {
   });
 }
 
-function onResponseListener([resolve, reject], evt) {
-  if (!evt.data) {
-    return false;
-  }
-
-  const { error, type, result } = evt.data;
-  if (type !== CYRESPONSE) {
-    return false;
-  }
-
-  if (error) {
-    let err = new Error(error.message);
-    err.stack = error.stack;
-    return reject(err)
-  }
-
-  if (Object.keys(result).length > 0) {
-    Cypress.log(result)
-    return resolve(result)
-  }
-  reject(new Error("No result found for key"));
+function id() {
+  const id = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+  return btoa(id);
 }
 
+
+/*
+  createResponseListener takes a `onCyResponseCb([resolve, reject], evt)` to be invoked after some common listener
+  assertions and returns the wrapped listener function
+*/
+function createResponseListener(onCyResponseCb) {
+  return function assertionsWrapper([resolve, reject], evt) {
+    if (!evt.data) {
+      return false;
+    }
+
+    const { error, type } = evt.data;
+    if (type !== CYRESPONSE) {
+      return false;
+    }
+
+    if (error) {
+      let err = new Error(error.message);
+      err.stack = error.stack;
+      return reject(err)
+    }
+
+    onCyResponseCb.call(this, [resolve, reject], evt);
+  }
+}
+
+function addExtensionCommand(commandName, commandFuncFactory) {
+  Cypress.Commands.add(commandName, function commandWrapper(...args) {
+    const { target, onCyResponseCb } = commandFuncFactory.apply(this, args);
+    return new Promise((resolve, reject) => {
+      win.postMessage({
+      type: CYCOMMAND,
+      id: id(),
+      target,
+      });
+
+      listenerWithTimeout(
+        [win, "message"],
+        createResponseListener(onCyResponseCb),
+        3e3
+      ).then(result => resolve(result))
+      .catch(reject)
+    });
+  });
+}
+
+const extensionCommands = {
+  "getLocalExtensionStorage": key => {
+    function onCyResponseCb([resolve, reject], evt) {
+      const { result } = evt.data;
+      if (result && Object.keys(result).length > 0) {
+        Cypress.log({
+          name: `getLocalExtensionStorage('${key}')`,
+          message: `Got result -> {${key}: ${result[key]}}`,
+        })
+        return resolve(result)
+      }
+      Cypress.log({
+        name: `getLocalExtensionStorage('${key}')`,
+        message: `No result found for key ${key}`
+      })
+      return resolve(false);
+    }
+
+    return {
+      target: {
+        propertyPath: "storage.local",
+        method: "get",
+        methodType: METHOD_TYPE.CALLBACK,
+        args: [key],
+      },
+      onCyResponseCb,
+    }
+  },
+
+  "setLocalExtensionStorage": (key, value) => {
+    function onCyResponseCb([resolve, reject], evt) {
+      // storage.set doesn't return results if succeeded so we just resolve (pass test)
+      // if a CYRESPONSE is received.
+      resolve(null);
+    }
+
+    return {
+      target: {
+        propertyPath: "storage.local",
+        method: "set",
+        methodType: METHOD_TYPE.CALLBACK,
+        args: [{[key]: value}],
+      },
+      onCyResponseCb,
+    }
+  },
+}
+
+Object.keys(extensionCommands).forEach((commandName) => {
+  addExtensionCommand(commandName, extensionCommands[commandName]);
+})
+
+/*
 Cypress.Commands.add("getLocalExtensionStorage", key => {
+  const onResponseListener = createResponseListener(([resolve, reject], evt) => {
+    const { result } = evt.data;
+    if (result && Object.keys(result).length > 0) {
+      Cypress.log({
+        name: `getLocalExtensionStorage('${key}')`,
+        message: `Got result -> {${key}: ${result[key]}}`,
+      })
+      return resolve(result)
+    }
+    Cypress.log({
+      name: `getLocalExtensionStorage('${key}')`,
+      message: `No result found for key ${key}`
+    })
+    return resolve(false);
+  });
+
   return new Promise((resolve, reject) => {
     win.postMessage({
     type: CYCOMMAND,
+    id: id(),
     target: {
       propertyPath: "storage.local",
       method: "get",
@@ -87,14 +185,21 @@ Cypress.Commands.add("getLocalExtensionStorage", key => {
 });
 
 Cypress.Commands.add("setLocalExtensionStorage", (key, value) => {
+  const onResponseListener = createResponseListener(([resolve, reject], evt) => {
+    // storage.set doesn't return results if succeeded so we just resolve (pass test)
+    // if a CYRESPONSE is received.
+    resolve(null);
+  });
+
   return new Promise((resolve, reject) => {
     win.postMessage({
       type: CYCOMMAND,
+      id: id(),
       target: {
         propertyPath: "storage.local",
         method: "set",
         methodType: METHOD_TYPE.CALLBACK,
-        args: [key, value],
+        args: [{[key]: value}],
       },
     });
 
@@ -102,4 +207,4 @@ Cypress.Commands.add("setLocalExtensionStorage", (key, value) => {
     .then(result => resolve(result))
     .catch(reject)
   });
-});
+});*/

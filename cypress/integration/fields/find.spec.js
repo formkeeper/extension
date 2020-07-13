@@ -6,10 +6,5 @@ context('Fields', () => {
    newSetup()
     .static();
 
-    it("should receive msg", () => {
-      cy.getLocalExtensionStorage("test-key").then(result => {
-        expect(result["test-key"]).to.equal("This is an example msg of storage")
-      })
-    });
   });
 });
