@@ -1,5 +1,5 @@
 class Setup {
-  static() {
+  serve() {
     beforeEach(() => {
       cy.visit('http://localhost:3798');
     });
