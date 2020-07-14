@@ -3,7 +3,7 @@ import newSetup from '../helpers/setup';
 context('Commands', () => {
   describe('storage', () => {
    newSetup()
-    .static();
+    .serve();
 
     const key = "test-key";
     const value = "sample-1";

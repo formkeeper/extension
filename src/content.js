@@ -42,6 +42,10 @@ function useExtension() {
   }
 }
 
+function findElements(parentEl) {
+  const selector = "linput:not([type='password']),textarea,[contenteditable],[contenteditable='false'],[spellcheck],[spellcheck='false']";
+}
+
 /*
   Page is the main component.
 

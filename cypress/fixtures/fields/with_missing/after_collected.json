@@ -1,0 +1,46 @@
+{
+  "elems": {
+    "98060994718edaa7d52f2e6e164792a891bf8b84a7944be87db0ccc92c704867": {
+      "selector": "input[type='text'][id='test-1']",
+      "snapshots": []
+    },
+    "284c7705a35f67ef8d448f892b2b9f2f154462db2cfdfc3e5b4fa7e01335256f": {
+      "selector": "input[name='name'][type='text'][id='test-2']",
+      "snapshots": []
+    },
+    "aa4f401584ceead5e7b580b4ed601c1a260817b7773d0064631aa78689a16cd0": {
+      "selector": "textarea[name='editor-2'][placeholder='Your text...'][cols='30'][rows='10']",
+      "snapshots": []
+    },
+    "16fdceed671db02f91b946727bc4a53ba994da211d0c78142c45fce6534c6a65": {
+      "selector": "textarea[name='editor-2'][placeholder='Your post...'][cols='30'][rows='10']",
+      "snapshots": []
+    },
+    "2efa87dc1cb24e2602f217ca83666aa98eb55d0623bc2c502ff9db4c0abd59a0": {
+      "selector": "div[class='dTR5cnlqdW16Y Tc3MjdtYWE3NGhy'][contenteditable='']",
+      "snapshots": []
+    },
+    "2b66c64bf3f1c8662649baeab1cfe6c6dec64371f55ba59263959e23d3980d21": {
+      "selector": "div[spellcheck='false'][contenteditable='']",
+      "snapshots": []
+    },
+    "9eee710731e6756269a21e54b96029df25633c6d2fb7b97fa37e4e99ee040204": {
+      "selector": "div[title='Rich editor'][contenteditable='']",
+      "snapshots": []
+    },
+    "177cd6adf725f8a086cd788bc9ca68b8990f96f4bdb8838946294e8c07d46019": {
+      "selector": "div[contenteditable='false']",
+      "snapshots": []
+    }
+  },
+    "missing": [
+      {
+        "selector": "input[name='name'][type='text'][id='test-4']",
+        "snapshots": []
+      },
+      {
+        "selector":"input[name='name'][type='text'][id='test-3']",
+        "snapshots":[]
+      }
+    ]
+}
