@@ -13,6 +13,10 @@ class ID {
       return;
     }
 
+    // TODO - ID, placeholders element should be enough to fingerprint an element.
+    // the less attributes used for fingerprinting, the more resistant the field
+    // fingerprint will be when changing attributes. So our objective is to use
+    // as few and as unique attributes as possible
     const attrStr = Array.from(el.attributes)
       .reduce((str, attr) => str += `[${attr.nodeName}='${attr.nodeValue}']`, "")
     this._selector = `${el.localName}${attrStr}`;

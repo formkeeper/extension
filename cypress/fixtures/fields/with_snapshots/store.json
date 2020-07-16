@@ -1,64 +1,66 @@
 {
-  "elems": {
-    "98060994718edaa7d52f2e6e164792a891bf8b84a7944be87db0ccc92c704867": {
-      "selector": "input[type='text'][id='test-1']",
-      "snapshots": [{
-        "hash": "3fd58b0f94a298646a653d6771ba939aaa944ebb6363a8804f6f1e1ffdccee3b",
-        "time": { "ts": 1593709449314, "pretty": "2/6 19:04:09" },
-        "contents": "This is a example ÜTF-8 Cóntënt text content for testing!"
+  "fields": {
+    "active": {
+      "98060994718edaa7d52f2e6e164792a891bf8b84a7944be87db0ccc92c704867": {
+        "selector": "input[type='text'][id='test-1']",
+        "snapshots": [{
+          "hash": "3fd58b0f94a298646a653d6771ba939aaa944ebb6363a8804f6f1e1ffdccee3b",
+          "time": { "ts": 1593709449314, "pretty": "2/6 19:04:09" },
+          "contents": "This is a example ÜTF-8 Cóntënt text content for testing!"
+        },
+        {
+          "hash": "3fd58b0f94a298646a653d6771ba939aaa944ebb6363a8804f6f1e1ffdccee3b",
+          "time": { "ts": 1593709449314, "pretty": "2/6 19:04:10" },
+          "contents": "This is a example ÜTF-8 Cóntënt text content for testing!"
+        },
+        {
+          "hash": "3fd58b0f94a298646a653d6771ba939aaa944ebb6363a8804f6f1e1ffdccee3b",
+          "time": { "ts": 1593709449314, "pretty": "2/6 19:04:10" },
+          "contents": "This is a example ÜTF-8 Cóntënt text content for testing!"
+        }]
       },
-      {
-        "hash": "3fd58b0f94a298646a653d6771ba939aaa944ebb6363a8804f6f1e1ffdccee3b",
-        "time": { "ts": 1593709449314, "pretty": "2/6 19:04:10" },
-        "contents": "This is a example ÜTF-8 Cóntënt text content for testing!"
+      "284c7705a35f67ef8d448f892b2b9f2f154462db2cfdfc3e5b4fa7e01335256f": {
+        "selector": "input[name='name'][type='text'][id='test-2']",
+        "snapshots": []
       },
-      {
-        "hash": "3fd58b0f94a298646a653d6771ba939aaa944ebb6363a8804f6f1e1ffdccee3b",
-        "time": { "ts": 1593709449314, "pretty": "2/6 19:04:10" },
-        "contents": "This is a example ÜTF-8 Cóntënt text content for testing!"
-      }]
+      "aa4f401584ceead5e7b580b4ed601c1a260817b7773d0064631aa78689a16cd0": {
+        "selector": "textarea[name='editor-2'][placeholder='Your text...'][cols='30'][rows='10']",
+        "snapshots": []
+      },
+      "16fdceed671db02f91b946727bc4a53ba994da211d0c78142c45fce6534c6a65": {
+        "selector": "textarea[name='editor-2'][placeholder='Your post...'][cols='30'][rows='10']",
+        "snapshots": []
+      },
+      "2efa87dc1cb24e2602f217ca83666aa98eb55d0623bc2c502ff9db4c0abd59a0": {
+        "selector": "div[class='dTR5cnlqdW16Y Tc3MjdtYWE3NGhy'][contenteditable='']",
+        "snapshots": []
+      },
+      "2b66c64bf3f1c8662649baeab1cfe6c6dec64371f55ba59263959e23d3980d21": {
+        "selector": "div[spellcheck='false'][contenteditable='']",
+        "snapshots": []
+      },
+      "9eee710731e6756269a21e54b96029df25633c6d2fb7b97fa37e4e99ee040204": {
+        "selector": "div[title='Rich editor'][contenteditable='']",
+        "snapshots": []
+      },
+      "177cd6adf725f8a086cd788bc9ca68b8990f96f4bdb8838946294e8c07d46019": {
+        "selector": "div[contenteditable='false']",
+        "snapshots": []
+      },
+      "68a981f921fc4ad518e69921aea733afe92ae68ebd147f3a7a002bdf2d66f484": {
+        "selector":"input[name='name'][type='text'][id='test-3']",
+        "snapshots":[{
+          "hash": "3fd58b0f94a298646a653d6771ba939aaa944ebb6363a8804f6f1e1ffdccee3b",
+          "time": { "ts": 1593709449314, "pretty": "2/6 19:04:11" },
+          "contents": "This is a example ÜTF-8 Cóntënt text content for testing!"
+        }]
+      }
     },
-    "284c7705a35f67ef8d448f892b2b9f2f154462db2cfdfc3e5b4fa7e01335256f": {
-      "selector": "input[name='name'][type='text'][id='test-2']",
-      "snapshots": []
-    },
-    "aa4f401584ceead5e7b580b4ed601c1a260817b7773d0064631aa78689a16cd0": {
-      "selector": "textarea[name='editor-2'][placeholder='Your text...'][cols='30'][rows='10']",
-      "snapshots": []
-    },
-    "16fdceed671db02f91b946727bc4a53ba994da211d0c78142c45fce6534c6a65": {
-      "selector": "textarea[name='editor-2'][placeholder='Your post...'][cols='30'][rows='10']",
-      "snapshots": []
-    },
-    "2efa87dc1cb24e2602f217ca83666aa98eb55d0623bc2c502ff9db4c0abd59a0": {
-      "selector": "div[class='dTR5cnlqdW16Y Tc3MjdtYWE3NGhy'][contenteditable='']",
-      "snapshots": []
-    },
-    "2b66c64bf3f1c8662649baeab1cfe6c6dec64371f55ba59263959e23d3980d21": {
-      "selector": "div[spellcheck='false'][contenteditable='']",
-      "snapshots": []
-    },
-    "9eee710731e6756269a21e54b96029df25633c6d2fb7b97fa37e4e99ee040204": {
-      "selector": "div[title='Rich editor'][contenteditable='']",
-      "snapshots": []
-    },
-    "177cd6adf725f8a086cd788bc9ca68b8990f96f4bdb8838946294e8c07d46019": {
-      "selector": "div[contenteditable='false']",
-      "snapshots": []
-    },
-    "68a981f921fc4ad518e69921aea733afe92ae68ebd147f3a7a002bdf2d66f484": {
-      "selector":"input[name='name'][type='text'][id='test-3']",
-      "snapshots":[{
-        "hash": "3fd58b0f94a298646a653d6771ba939aaa944ebb6363a8804f6f1e1ffdccee3b",
-        "time": { "ts": 1593709449314, "pretty": "2/6 19:04:11" },
-        "contents": "This is a example ÜTF-8 Cóntënt text content for testing!"
-      }]
-    }
-  },
     "missing": [
       {
         "selector": "input[name='name'][type='text'][id='test-4']",
         "snapshots": []
       }
     ]
+  }
 }

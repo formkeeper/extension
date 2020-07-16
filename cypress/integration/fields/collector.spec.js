@@ -1,7 +1,7 @@
 import newSetup from "../helpers/setup";
 import ID from "../../../src/lib/collector/id";
 import AsyncQueue from "../../../src/lib/collector/queue";
-import Collector from "../../../src/lib/collector";
+import collect from "../../../src/lib/collector";
 
 function removeDOMElems(elems) {
   for (let hash in elems) {
@@ -71,12 +71,14 @@ context("Fields", () => {
     it("should collect all the fields on the page", () => {
       cy.fixture("fields/store.json").then(store => {
 
+        const emptyFields = {
+          active: {},
+          missing: [],
+        }
         cy.document().then($doc => {
-          const c = new Collector($doc);
-
-          cy.wrap(c.collect()).then(results => {
-            removeDOMElems(results.elems);
-            expect(results.elems).to.deep.equal(store.elems);
+          cy.wrap(collect(emptyFields, $doc)).then(results => {
+            removeDOMElems(results.fields.active);
+            expect(results.fields.active).to.deep.equal(store.fields.active);
           });
         })
 
@@ -88,15 +90,13 @@ context("Fields", () => {
         cy.fixture("fields/with_missing/store.json").then(store => {
 
           cy.document().then($doc => {
-            const c = new Collector($doc);
-            const { elems, missing } = store;
-            c.mergeWith({ elems, missing })
+            const { fields } = store;
 
-            cy.wrap(c.collect()).then(results => {
-              removeDOMElems(results.elems);
-              expect(results.elems).to.deep.equal(collected.elems);
-              expect(results.missing).to.deep.equal(collected.missing);
-            });
+            cy.wrap(collect(fields, $doc)).then(results => {
+              removeDOMElems(results.fields.active);
+              expect(results.fields.active).to.deep.equal(collected.fields.active);
+              expect(results.fields.missing).to.deep.equal(collected.fields.missing);
+            })
           })
 
         })
@@ -105,18 +105,16 @@ context("Fields", () => {
 
 
     it("should merge with old data and snapshots", () => {
-      cy.fixture("fields/with_snapshots/after_collected.json").then(collected => {
+      cy.fixture("fields/with_snapshots/after_collected.json").then(collected => {-
         cy.fixture("fields/with_snapshots/store.json").then(store => {
 
           cy.document().then($doc => {
-            const c = new Collector($doc);
-            const { elems, missing } = store;
-            c.mergeWith({ elems, missing })
+            const { fields } = store;
 
-            cy.wrap(c.collect()).then(results => {
-              removeDOMElems(results.elems);
-              expect(results.elems).to.deep.equal(collected.elems);
-              expect(results.missing).to.deep.equal(collected.missing);
+            cy.wrap(collect(fields, $doc)).then(results => {
+              removeDOMElems(results.fields.active);
+              expect(results.fields.active).to.deep.equal(collected.fields.active);
+              expect(results.fields.missing).to.deep.equal(collected.fields.missing);
             });
           })
 

@@ -1,13 +1,13 @@
 /*global chrome*/
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import './Sidebar.css';
 
-function Sidebar ({ location }) {
+function Sidebar() {
   return (
     <div className="sidebar">
       <p>
-        {location}
+        Sidebar
       </p>
     </div>
   );

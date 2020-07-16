@@ -1,1 +1,1 @@
-export { default } from "./collector";
+export { default } from "./collect";
