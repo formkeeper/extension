@@ -1,5 +1,5 @@
-const paths = require('../config/paths');
-const fs = require('fs-extra');
+const paths = require("../config/paths");
+const fs = require("fs-extra");
 
 function copyPublicFolder() {
   const isProd = process.env.NODE_ENV === "production";
@@ -7,17 +7,17 @@ function copyPublicFolder() {
     dereference: true,
     filter: function copyFile(src) {
       switch(src) {
-        case paths.appHtml:
-          return false;
-        case paths.cyhook:
-        case paths.cyinject:
-        case paths.manifestDevJson:
-          return !isProd;
-        case paths.manifestProdJson:
-          return isProd;
+      case paths.appHtml:
+        return false;
+      case paths.cyhook:
+      case paths.cyinject:
+      case paths.manifestDevJson:
+        return !isProd;
+      case paths.manifestProdJson:
+        return isProd;
 
-        default:
-          return true;
+      default:
+        return true;
       }
     }
   });
@@ -31,15 +31,15 @@ function renameManifest() {
   }
 
   try {
-    fs.renameSync(paths.manifestBuildProdJson, paths.manifestBuildJson)
+    fs.renameSync(paths.manifestBuildProdJson, paths.manifestBuildJson);
   } catch(err) {
     ignoreDoesntExistError(err);
   }
 
   try {
-    fs.renameSync(paths.manifestBuildDevJson, paths.manifestBuildJson)
+    fs.renameSync(paths.manifestBuildDevJson, paths.manifestBuildJson);
   } catch(err) {
-    ignoreDoesntExistError(err)
+    ignoreDoesntExistError(err);
   }
 }
 
@@ -68,4 +68,4 @@ function renameManifest() {
 module.exports = {
   renameManifest,
   copyPublicFolder
-}
+};
