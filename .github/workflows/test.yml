@@ -22,7 +22,7 @@ jobs:
         # Save ~/.cache which contains yarn cache, node_modules and crypress cache
         path: |
           '~/.cache'
-          'node_modules'
+          '**/node_modules'
         # Create/Hit using OS and yarn.lock hash as key
         key: ${{ runner.os }}-buildv1-${{ hashFiles('**/yarn.lock') }}
         # Alternate keys
