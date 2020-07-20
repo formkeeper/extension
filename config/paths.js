@@ -1,8 +1,8 @@
-'use strict';
 
-const path = require('path');
-const fs = require('fs');
-const url = require('url');
+
+const path = require("path");
+const fs = require("fs");
+const url = require("url");
 
 // Make sure any symlinks in the project folder are resolved:
 // https://github.com/facebookincubator/create-react-app/issues/637
@@ -12,7 +12,7 @@ const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
 const envPublicUrl = process.env.PUBLIC_URL;
 
 function ensureSlash(path, needsSlash) {
-  const hasSlash = path.endsWith('/');
+  const hasSlash = path.endsWith("/");
   if (hasSlash && !needsSlash) {
     return path.substr(path, path.length - 1);
   } else if (!hasSlash && needsSlash) {
@@ -34,30 +34,30 @@ const getPublicUrl = appPackageJson =>
 function getServedPath(appPackageJson) {
   const publicUrl = getPublicUrl(appPackageJson);
   const servedUrl =
-    envPublicUrl || (publicUrl ? url.parse(publicUrl).pathname : '/');
+    envPublicUrl || (publicUrl ? url.parse(publicUrl).pathname : "/");
   return ensureSlash(servedUrl, true);
 }
 
 // config after eject: we're in ./config/
 module.exports = {
-  dotenv: resolveApp('.env'),
-  appBuild: resolveApp('build'),
-  appPublic: resolveApp('public'),
-  appHtml: resolveApp('public/index.html'),
-  appIndexJs: resolveApp('src/index.js'),
-  appJs: resolveApp('src/App.js'),
-  appPackageJson: resolveApp('package.json'),
-  manifestDevJson: resolveApp('public/manifest.dev.json'),
-  manifestBuildDevJson: resolveApp('build/manifest.dev.json'),
-  manifestProdJson: resolveApp('public/manifest.prod.json'),
-  manifestBuildProdJson: resolveApp('build/manifest.prod.json'),
-  manifestBuildJson: resolveApp('build/manifest.json'),
-  cyhook: resolveApp('public/app/UNSAFE_cy-hook.js'),
-  cyinject: resolveApp('public/static/js/UNSAFE_cy-inject.js'),
-  appSrc: resolveApp('src'),
-  testWebsitePublic: resolveApp('cypress/fixtures/website_with_fields'),
-  yarnLockFile: resolveApp('yarn.lock'),
-  appNodeModules: resolveApp('node_modules'),
-  publicUrl: getPublicUrl(resolveApp('package.json')),
-  servedPath: getServedPath(resolveApp('package.json')),
+  dotenv: resolveApp(".env"),
+  appBuild: resolveApp("build"),
+  appPublic: resolveApp("public"),
+  appHtml: resolveApp("public/index.html"),
+  appIndexJs: resolveApp("src/index.js"),
+  appJs: resolveApp("src/App.js"),
+  appPackageJson: resolveApp("package.json"),
+  manifestDevJson: resolveApp("public/manifest.dev.json"),
+  manifestBuildDevJson: resolveApp("build/manifest.dev.json"),
+  manifestProdJson: resolveApp("public/manifest.prod.json"),
+  manifestBuildProdJson: resolveApp("build/manifest.prod.json"),
+  manifestBuildJson: resolveApp("build/manifest.json"),
+  cyhook: resolveApp("public/app/UNSAFE_cy-hook.js"),
+  cyinject: resolveApp("public/static/js/UNSAFE_cy-inject.js"),
+  appSrc: resolveApp("src"),
+  testWebsitePublic: resolveApp("cypress/fixtures/website_with_fields"),
+  yarnLockFile: resolveApp("yarn.lock"),
+  appNodeModules: resolveApp("node_modules"),
+  publicUrl: getPublicUrl(resolveApp("package.json")),
+  servedPath: getServedPath(resolveApp("package.json")),
 };

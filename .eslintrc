@@ -6,7 +6,7 @@
     "linebreak-style": ["error", "unix"],
     "semi": ["error", "always"],
     "semi-style": ["error", "last"],
-    "max-len": ["error", { "code": 80, "tabWidth": 2, "ignoreStrings": true}],
+    "max-len": ["error", { "code": 80, "tabWidth": 2, "ignoreStrings": true, "ignoreUrls": true}],
     "no-unused-expressions": "off",
     "chai-friendly/no-unused-expressions": "error"
   },
