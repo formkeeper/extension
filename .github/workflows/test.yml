@@ -64,5 +64,12 @@ jobs:
         CI: true
         NODE_ENV: test
 
+    # Upload cypress videos if previous step failed
+    - name: Upload failed integration tests videos
+      uses: actions/upload-artifact@v2
+      if: failure()
+      with:
+        name: cypress-videos
+        path: '**/cypress/videos'
 
 
