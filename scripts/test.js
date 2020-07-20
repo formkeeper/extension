@@ -33,7 +33,7 @@ async function runUnitTests(mode) {
   // print all test results
   argv.push("--verbose");
 
-  if (mode === modes.UNIT) {
+  if (mode === modes.UNIT && !process.env.CI) {
     argv.push("--watch");
   } else {
   }
@@ -49,9 +49,10 @@ async function runIntegrationTests(mode) {
     server: paths.testWebsitePublic,
     port: 3798,
     open: false,
+    watch: false,
   });
 
-  if (mode === modes.E2E) {
+  if (mode === modes.E2E && !process.env.CI) {
     await cy.open();
   } else {
     await cy.run({
@@ -60,8 +61,6 @@ async function runIntegrationTests(mode) {
   }
   bs.exit();
 }
-
-
 
 async function run() {
   let mode;
