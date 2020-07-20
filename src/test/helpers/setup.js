@@ -11,7 +11,7 @@ class ChromeStub {
       getURL: function() {
         return "#";
       }
-    }
+    };
   }
 
   _addListener(fn) {

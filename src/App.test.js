@@ -15,7 +15,7 @@ describe("<App />", () => {
 
   beforeEach(() => {
     jest.spyOn(useFieldCollector, "default")
-    .mockImplementation(() => {});
+      .mockImplementation(() => {});
     wrapper = mount(<App />);
   });
 
@@ -24,19 +24,19 @@ describe("<App />", () => {
   });
 
   it("renders without crashing", () => {
-    expect(wrapper.html()).toBe(null)
+    expect(wrapper.html()).toBe(null);
   });
 
 
   it("visible when badged is clicked", () => {
-    expect(wrapper.html()).toBe(null)
+    expect(wrapper.html()).toBe(null);
 
     act(() => {
-      chromeStub.dispatchMessage("on_badge_click")
-    })
-    wrapper.update()
+      chromeStub.dispatchMessage("on_badge_click");
+    });
+    wrapper.update();
 
-    const AppHTML = '<div id="ext-wrapper"><div class="sidebar-wrapper"><iframe></iframe></div></div>'
-    expect(wrapper.html()).toBe(AppHTML)
+    const AppHTML = "<div id=\"ext-wrapper\"><div class=\"sidebar-wrapper\"><iframe></iframe></div></div>";
+    expect(wrapper.html()).toBe(AppHTML.trim());
   });
 });

@@ -2,10 +2,28 @@ import newSetup from "../helpers/setup";
 import ID from "../../../src/lib/collector/id";
 import AsyncQueue from "../../../src/lib/collector/queue";
 import collect from "../../../src/lib/collector";
+import { CollectorStorage } from "../../../src/lib/collector/storage";
 
 function removeDOMElems(elems) {
   for (let hash in elems) {
     delete elems[hash].el;
+  }
+}
+
+class FakeStorage extends CollectorStorage {
+  constructor(store) {
+    super(store);
+    this._store = store;
+  }
+
+  async get() {
+    return Promise.resolve(this._store);
+  }
+}
+
+class EmptyStorage extends CollectorStorage {
+  async get() {
+    return Promise.resolve(null);
   }
 }
 
@@ -21,11 +39,14 @@ context("Fields", () => {
 
         const id = new ID($doc);
         id.generate($input).then(() => {
-          expect(id.isUnique()).to.equal(true);
-          expect(id.get()).to.equal("98060994718edaa7d52f2e6e164792a891bf8b84a7944be87db0ccc92c704867");
-          expect(id.getSelector()).to.equal("input[type='text'][id='test-1']");
+          expect(id.isUnique())
+            .to.equal(true);
+          expect(id.get())
+            .to.equal("98060994718edaa7d52f2e6e164792a891bf8b84a7944be87db0ccc92c704867");
+          expect(id.getSelector())
+            .to.equal("input[type='text'][id='test-1']");
         });
-      })
+      });
     });
 
     it("async queue should add work functions and wait asynchronously for group to finish", () => {
@@ -37,7 +58,7 @@ context("Fields", () => {
             cb();
             resolve();
           }, timeout);
-        }
+        };
       }
 
       const result1 = cy.spy();
@@ -61,7 +82,7 @@ context("Fields", () => {
         // blockedWork should wait for group to finish
         expect(blockedWork).to.be.calledAfter(result1);
         expect(blockedWork).to.be.calledAfter(result2);
-      })
+      });
       // nonBlockedWork shouldn't be blocked by waitForGroup
       nonBlockedWork();
       expect(nonBlockedWork).to.be.calledBefore(result2);
@@ -70,57 +91,88 @@ context("Fields", () => {
 
     it("should collect all the fields on the page", () => {
       cy.fixture("fields/store.json").then(store => {
-
-        const emptyFields = {
-          active: {},
-          missing: [],
-        }
         cy.document().then($doc => {
-          cy.wrap(collect(emptyFields, $doc)).then(results => {
+          const storage = new EmptyStorage();
+          cy.wrap(collect($doc, storage)).then(results => {
             removeDOMElems(results.fields.active);
             expect(results.fields.active).to.deep.equal(store.fields.active);
           });
-        })
+        });
 
-      })
+      });
     });
 
-    it("should merge with old data and find missing elements", () => {
+    it("should reconciliate with old data from storage and find missing elements", () => {
       cy.fixture("fields/with_missing/after_collected.json").then(collected => {
         cy.fixture("fields/with_missing/store.json").then(store => {
 
           cy.document().then($doc => {
-            const { fields } = store;
+            const storage = new FakeStorage(store);
 
-            cy.wrap(collect(fields, $doc)).then(results => {
+            cy.wrap(collect($doc, storage)).then(results => {
               removeDOMElems(results.fields.active);
-              expect(results.fields.active).to.deep.equal(collected.fields.active);
-              expect(results.fields.missing).to.deep.equal(collected.fields.missing);
-            })
-          })
+              expect(results.fields.active)
+                .to.deep.equal(collected.fields.active);
+              expect(results.fields.missing)
+                .to.deep.equal(collected.fields.missing);
+            });
+          });
 
-        })
-      })
+        });
+      });
     });
 
-
-    it("should merge with old data and snapshots", () => {
-      cy.fixture("fields/with_snapshots/after_collected.json").then(collected => {-
+    it("should reconciliate with old data and snapshots", () => {
+      cy.fixture("fields/with_snapshots/after_collected.json").then(collected => {
         cy.fixture("fields/with_snapshots/store.json").then(store => {
 
           cy.document().then($doc => {
-            const { fields } = store;
+            const storage = new FakeStorage(store);
 
-            cy.wrap(collect(fields, $doc)).then(results => {
+            cy.wrap(collect($doc, storage)).then(results => {
               removeDOMElems(results.fields.active);
-              expect(results.fields.active).to.deep.equal(collected.fields.active);
-              expect(results.fields.missing).to.deep.equal(collected.fields.missing);
+              expect(results.fields.active)
+                .to.deep.equal(collected.fields.active);
+              expect(results.fields.missing)
+                .to.deep.equal(collected.fields.missing);
             });
-          })
+          });
 
-        })
-      })
+        });
+      });
     });
+
+
+    /*
+      Can't test collect function directly with ChromeStorage layer
+      since we need access to chrome.storage. We need to test the actual
+      full component from the contentScript.
+
+      So we better test this when basic UI is finished and test the UI
+      directly.
+
+      TODO: Test UI for a reconciliation from real storage
+
+    it("should reconciliate with old data from real storage", () => {
+      cy.fixture("fields/with_missing/after_collected.json").then(collected => {
+        cy.fixture("fields/with_missing/store.json").then(store => {
+
+          cy.document().then($doc => {
+            cy.setLocalExtensionStorage(STORAGE_KEY, { store }).then(() => {
+              cy.wrap(collect($doc)).then(results => {
+                removeDOMElems(results.fields.active);
+                expect(results.fields.active)
+                  .to.deep.equal(collected.fields.active);
+                expect(results.fields.missing)
+                  .to.deep.equal(collected.fields.missing);
+              });
+            });
+          });
+
+        });
+      });
+    });
+    */
 
   });
 });
