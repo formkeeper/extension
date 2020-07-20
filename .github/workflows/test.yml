@@ -1,0 +1,51 @@
+name: Running tests
+
+on:
+  pull_request:
+  push:
+    branches:
+    - master
+    - dev
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - uses: action/checkout@v2
+
+    - name: Cache node_modules
+      id: cache-node-modules
+      uses: action/cache@v2
+      with:
+        # Store node_modules
+        path: '**/node_modules'
+        # Create/Hit using OS and yarn.lock hash as key
+        key: ${{ runner.os }}-build-${{ hashFiles('**/yarn.lock') }}
+        # Alternate keys
+        restore-keys: |
+          ${{ runner.os }}-build-
+
+    - name: Install dependencies
+      if: steps.cache-node-modules.outputs.cache-hit != 'true'
+      run: yarn
+
+    - name: Build dev
+      run: yarn build:dev
+      env:
+        CI: true
+
+    - name: Run unit tests
+      run: yarn test:unit
+      env:
+        CI: true
+
+    - name: Run integration tests
+      uses: cypress-io/github-action@v2
+      run: yarn test:cy
+      env:
+        CI: true
+
+
+

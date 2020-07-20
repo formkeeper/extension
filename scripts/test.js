@@ -1,5 +1,3 @@
-
-
 // Do this as the first thing so that any code reading it knows the right env.
 process.env.BABEL_ENV = "test";
 process.env.NODE_ENV = "test";
@@ -41,24 +39,43 @@ async function runUnitTests(mode) {
 }
 
 async function runIntegrationTests(mode) {
+  const waitOn = require("wait-on");
   const cy = require("cypress");
   const { buildDev } = require("./build-dev");
   await buildDev();
   const bs = require("browser-sync").create();
+
+  const port = 3798;
   bs.init({
+    port,
     server: paths.testWebsitePublic,
-    port: 3798,
     open: false,
     watch: false,
   });
 
+  // Wait for 200 response from browser-sync
+  console.log("Waiting server to start...");
+  try {
+    await waitOn({
+      resources: [
+        `http://localhost:${port}`
+      ],
+    });
+  } catch (err) {
+    throw err;
+  }
+  console.log("[OK] Server is up.");
+
   if (mode === modes.E2E && !process.env.CI) {
+    console.log("CY: Running interactive mode");
     await cy.open();
   } else {
+    console.log("CY: Running normal mode");
     await cy.run({
       browser: "chrome",
     });
   }
+
   bs.exit();
 }
 
