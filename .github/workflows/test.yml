@@ -13,11 +13,11 @@ jobs:
 
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: action/checkout@v2
+    - uses: actions/checkout@v2
 
     - name: Cache node_modules
       id: cache-node-modules
-      uses: action/cache@v2
+      uses: actions/cache@v2
       with:
         # Store node_modules
         path: '**/node_modules'
