@@ -10,8 +10,6 @@ import useExtensionVisibility from "./hooks/useExtensionVisibility";
 
 import Page from "./components/page/Page";
 
-// TODO - Prevent push if test fails
-
 /**
   App is the main component.
 
