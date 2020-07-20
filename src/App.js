@@ -10,7 +10,6 @@ import useExtensionVisibility from "./hooks/useExtensionVisibility";
 
 import Page from "./components/page/Page";
 
-// TODO - Fix eslint errors
 // TODO - Prevent push if test fails
 
 /**

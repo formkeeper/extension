@@ -8,7 +8,7 @@ import { STORAGE_KEY } from "../../global/constants";
  *
  * Storage layers must extend this class. Thus, missing required methods
  * will throw an error
- * 
+ *
  */
 export class CollectorStorage {
   /**
@@ -20,8 +20,6 @@ export class CollectorStorage {
   }
 }
 
-// TODO: contentScripts don't have access to chrome.storage. Need to
-// send message to background.
 class ChromeStorage extends CollectorStorage {
   get() {
     return new Promise(resolve => {

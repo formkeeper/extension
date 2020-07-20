@@ -5,9 +5,9 @@ import Sidebar from "../sidebar/Sidebar";
 import useExtensionLocation from "../../hooks/useExtensionLocation";
 import useFieldCollector from "../../hooks/useFieldCollector";
 
-function Page({ window, document, fields }) {
+function Page({ window, document }) {
   const location = useExtensionLocation(window);
-  useFieldCollector({ fields, document, location });
+  useFieldCollector({ document, location });
 
   return (
     <div id="sidebar-wrapper">
