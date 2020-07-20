@@ -12,7 +12,7 @@
 // This function is called when a project is opened or re-opened (e.g. due to
 // the project's config changing)
 
-const paths = require('../../config/paths');
+const paths = require("../../config/paths");
 
 /**
  * @type {Cypress.PluginConfig}
@@ -20,8 +20,8 @@ const paths = require('../../config/paths');
 module.exports = (on, config) => {
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
-  on('before:browser:launch', (browser, launchOpts) => {
+  on("before:browser:launch", (browser, launchOpts) => {
     launchOpts.extensions.push(paths.appBuild);
     return launchOpts;
-  })
-}
+  });
+};
