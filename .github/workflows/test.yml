@@ -32,16 +32,16 @@ jobs:
           ${{ runner.os }}-build-cache-
 
     - name: Cache node_modules
-    id: cache-node-modules
-    uses: actions/cache@v2
-    with:
-      # Save node_modules
-      path: '**/node_modules'
-      # Create/Hit using OS and yarn.lock hash as key
-      key: ${{ runner.os }}-build-modules-${{ hashFiles('**/yarn.lock') }}
-      # Alternate keys
-      restore-keys: |
-        ${{ runner.os }}-build-modules-
+      id: cache-node-modules
+      uses: actions/cache@v2
+      with:
+        # Save node_modules
+        path: '**/node_modules'
+        # Create/Hit using OS and yarn.lock hash as key
+        key: ${{ runner.os }}-build-modules-${{ hashFiles('**/yarn.lock') }}
+        # Alternate keys
+        restore-keys: |
+          ${{ runner.os }}-build-modules-
 
     - name: Install dependencies
       if: |
