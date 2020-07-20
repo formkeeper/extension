@@ -1,9 +1,9 @@
 /*global chrome*/
-import React, { useReducer } from 'react';
-import ReactDOM from 'react-dom';
-import Frame, { FrameContextConsumer }from 'react-frame-component';
-import rootReducer, { initialState } from './reducers';
-import { withThunk } from './lib/utils/helpers';
+import React, { useReducer } from "react";
+import ReactDOM from "react-dom";
+import Frame, { FrameContextConsumer }from "react-frame-component";
+import rootReducer, { initialState } from "./reducers";
+import { withThunk } from "./lib/utils/helpers";
 import { FieldsDispatch } from "./global/context";
 
 import useExtensionVisibility from "./hooks/useExtensionVisibility";
@@ -16,9 +16,10 @@ import Page from "./components/page/Page";
 /**
   App is the main component.
 
-  The extension behaviour depends on the context, e.g. whenever a new page is visited (including SPA
-  and server side pages) or a field (textarea, div with contenteditable, inputs...) is focused, this
-  component (and the whole extension, consequently) will be re-rendered.
+  The extension behaviour depends on the context, e.g. whenever a new page is
+  visited (including SPAand server side pages) or a field (textarea, div with
+  contenteditable, inputs...) is focused, this component (and the whole
+  extension, consequently) will be re-rendered.
 */
 export function App() {
   const isVisible = useExtensionVisibility();
@@ -43,14 +44,14 @@ export function App() {
               {
                 ({document, window}) => {
                   return (
-                  <FieldsDispatch.Provider value={dispatch}>
-                    <Page
-                      document={document}
-                      window={window}
-                      fields={state.fields}/>
-                  </FieldsDispatch.Provider>
+                    <FieldsDispatch.Provider value={dispatch}>
+                      <Page
+                        document={document}
+                        window={window}
+                        fields={state.fields}/>
+                    </FieldsDispatch.Provider>
 
-                  )
+                  );
                 }
               }
             </FrameContextConsumer>
@@ -62,7 +63,7 @@ export function App() {
   return null;
 }
 
-const app = document.createElement('div');
+const app = document.createElement("div");
 app.id = "formkeeper-root";
 document.body.appendChild(app);
 ReactDOM.render(<App />, app);

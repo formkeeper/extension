@@ -12,16 +12,18 @@ function useExtensionLocation(win = window) {
     function onMessage(req, sender, sendResponse) {
       const eventToHandler = {
         "on_url_updated": handleUrlUpdated,
-      }
+      };
       const handler = eventToHandler[req.type];
-      handler && handler.call(this, req, sender, sendResponse);
+      if (handler) {
+        handler.call(this, req, sender, sendResponse);
+      }
     }
 
     chrome.runtime.onMessage.addListener(onMessage);
     return function cleanup() {
       chrome.runtime.onMessage.removeListener(onMessage);
-    }
-  })
+    };
+  });
 
   return location;
 }

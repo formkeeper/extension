@@ -6,17 +6,17 @@ export const initialState = {
     missing: [],
   },
   isCollected: false,
-}
+};
 
 function rootReducer(state, action) {
   switch (action.type) {
-    case ActionTypes.COLLECT_FIELDS_SUCCESS:
-      const { fields } = action.results;
-      return {
-        fields,
-        isCollected: true,
-      }
-    default:
+  case ActionTypes.COLLECT_FIELDS_SUCCESS:
+    const { fields } = action.results;
+    return {
+      fields,
+      isCollected: true,
+    };
+  default:
   }
   return initialState;
 }

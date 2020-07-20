@@ -5,9 +5,10 @@ import { collectFields } from "../actions";
 function useFieldCollector({ fields, document, location }) {
   const dispatch = useContext(FieldsDispatch);
   useEffect(() => {
-    // TODO - remove fields (collect them directly from storage within collect())
+    // TODO - remove fields (collect them directly from storage within
+    // collect())
     dispatch(collectFields(fields, document));
   }, [location]);
 }
 
-export default useFieldCollector
+export default useFieldCollector;

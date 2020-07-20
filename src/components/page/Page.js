@@ -2,8 +2,8 @@ import React from "react";
 
 import Sidebar from "../sidebar/Sidebar";
 
-import useExtensionLocation from "../../hooks/useExtensionLocation"
-import useFieldCollector from "../../hooks/useFieldCollector"
+import useExtensionLocation from "../../hooks/useExtensionLocation";
+import useFieldCollector from "../../hooks/useFieldCollector";
 
 function Page({ window, document, fields }) {
   const location = useExtensionLocation(window);

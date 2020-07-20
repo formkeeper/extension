@@ -6,6 +6,15 @@
     "linebreak-style": ["error", "unix"],
     "semi": ["error", "always"],
     "semi-style": ["error", "last"],
-    "max-len": ["error", { "code": 80, "tabWidth": 2 }]
+    "max-len": ["error", { "code": 80, "tabWidth": 2, "ignoreStrings": true}],
+    "no-unused-expressions": "off",
+    "chai-friendly/no-unused-expressions": "error"
+  },
+  "plugins": [
+    "cypress",
+    "chai-friendly"
+  ],
+  "env": {
+    "cypress/globals": true
   }
 }
