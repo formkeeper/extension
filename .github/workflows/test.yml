@@ -15,12 +15,12 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
 
-    - name: Cache node_modules
-      id: cache-node-modules
+    - name: Cache yarn and cypress
+      id: cache-files
       uses: actions/cache@v2
       with:
-        # Store node_modules
-        path: '**/node_modules'
+        # Save ~/.cache which contains yarn cache (node_modules) and crypress cache
+        path: '~/.cache'
         # Create/Hit using OS and yarn.lock hash as key
         key: ${{ runner.os }}-build-${{ hashFiles('**/yarn.lock') }}
         # Alternate keys
@@ -28,8 +28,8 @@ jobs:
           ${{ runner.os }}-build-
 
     - name: Install dependencies
-      if: steps.cache-node-modules.outputs.cache-hit != 'true'
-      run: yarn
+      if: steps.cache-files.outputs.cache-hit != 'true'
+      run: yarn install --frozen-lockfile
 
     - name: Build dev
       run: yarn build:dev
