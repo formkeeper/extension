@@ -30,8 +30,9 @@ const publicUrl = publicPath.slice(0, -1);
 // Get environment variables to inject into our app.
 const env = getClientEnvironment(publicUrl);
 
-if (env.stringified['process.env'].NODE_ENV !== '"development"') {
-  throw new Error('Development builds in other than development mode may be harder to debug.');
+if (env.stringified['process.env'].NODE_ENV !== '"development"' &&
+    env.stringified['process.env'].NODE_ENV !== '"test"') {
+  throw new Error('Development builds in other than development or test mode may be harder to debug.');
 }
 
 // Note: defined here because it will be used more than once.
@@ -59,7 +60,7 @@ module.exports = {
   // In production, we only want to load the polyfills and the app code.
   entry: {
     // app: [require.resolve('./polyfills'), paths.appIndexJs],
-    content: [require.resolve('./polyfills'), './src/content.js']
+    app: [require.resolve('./polyfills'), paths.appJs]
   },
   optimization: {
     minimize: false //Update this to true or false
@@ -114,7 +115,7 @@ module.exports = {
   module: {
     strictExportPresence: true,
     rules: [
-      // TODO: Disable require.ensure as it's not a standard language feature.
+      // TO-DO: Disable require.ensure as it's not a standard language feature.
       // We are waiting for https://github.com/facebookincubator/create-react-app/issues/2176.
       // { parser: { requireEnsure: false } },
 

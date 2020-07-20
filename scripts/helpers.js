@@ -24,13 +24,33 @@ function copyPublicFolder() {
 }
 
 function renameManifest() {
+  function ignoreDoesntExistError(err) {
+    if (err.code !== "ENOENT") {
+      throw err;
+    }
+  }
+
+  try {
+    fs.renameSync(paths.manifestBuildProdJson, paths.manifestBuildJson)
+  } catch(err) {
+    ignoreDoesntExistError(err);
+  }
+
+  try {
+    fs.renameSync(paths.manifestBuildDevJson, paths.manifestBuildJson)
+  } catch(err) {
+    ignoreDoesntExistError(err)
+  }
+}
+
+/*
+function renameManifest() {
   return new Promise((resolve, reject) => {
     function ignoreDoesntExistError(err) {
       if (err.code === "ENOENT") {
         return resolve();
       }
-      reject(err);
-      throw err;
+      return reject(err);
     }
 
     // Rename manifest.prod.json to manifest.json
@@ -43,7 +63,7 @@ function renameManifest() {
       .then(resolve)
       .catch(ignoreDoesntExistError);
   });
-}
+}*/
 
 module.exports = {
   renameManifest,

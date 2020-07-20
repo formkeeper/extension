@@ -59,7 +59,7 @@ module.exports = {
   // In production, we only want to load the polyfills and the app code.
   entry: {
     // app: [require.resolve('./polyfills'), paths.appIndexJs],
-    content: [require.resolve('./polyfills'), './src/content.js']
+    app: [require.resolve('./polyfills'), paths.appJs]
   },
   optimization: {
     minimize: false //Update this to true or false
@@ -114,7 +114,7 @@ module.exports = {
   module: {
     strictExportPresence: true,
     rules: [
-      // TODO: Disable require.ensure as it's not a standard language feature.
+      // TO-DO: Disable require.ensure as it's not a standard language feature.
       // We are waiting for https://github.com/facebookincubator/create-react-app/issues/2176.
       // { parser: { requireEnsure: false } },
 

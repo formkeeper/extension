@@ -17,12 +17,32 @@ require('../config/env');
 
 const argv = process.argv;
 const paths = require('../config/paths');
-const cy = require('cypress');
+
+const modes = {
+  E2E: 'e2e-mode',
+  UNIT: 'unit-mode',
+  BOTH: 'both-mode',
+}
 
 // Build dev
-const { buildDev } = require('./build-dev');
 
-async function run() {
+async function runUnitTests(mode) {
+  const jest = require('jest');
+  let argv = process.argv.slice(2);
+
+  // print all test results
+  argv.push('--verbose');
+
+  if (mode === modes.UNIT) {
+    argv.push('--watch');
+  } else {
+  }
+  await jest.run(argv);
+}
+
+async function runIntegrationTests(mode) {
+  const cy = require('cypress');
+  const { buildDev } = require('./build-dev');
   await buildDev();
   const bs = require('browser-sync').create();
   bs.init({
@@ -31,12 +51,36 @@ async function run() {
     open: false,
   })
 
-  if (~argv.indexOf('--interactive')) {
-    cy.open();
+  if (mode === modes.E2E) {
+    await cy.open();
   } else {
-    cy.run({
+    await cy.run({
       browser: "chrome",
-    })
+    });
+  }
+  bs.exit();
+}
+
+
+
+async function run() {
+  let mode;
+
+  const unitIdx = argv.indexOf('--unit');
+  const e2eIdx = argv.indexOf('--e2e')
+
+  if (unitIdx > 0) {
+    mode = modes.UNIT;
+    argv.splice(unitIdx, 1);
+    await runUnitTests(mode);
+  } else if (e2eIdx > 0) {
+    mode = modes.E2E;
+    argv.splice(e2eIdx, 1);
+    await runIntegrationTests(mode);
+  } else {
+    mode = modes.BOTH;
+    await runUnitTests(mode);
+    await runIntegrationTests(mode);
   }
 }
 

@@ -1,8 +1,10 @@
 'use strict';
 
-// Do this as the first thing so that any code reading it knows the right env.
- process.env.BABEL_ENV = 'development';
- process.env.NODE_ENV = 'development';
+if (!process.env.NODE_ENV === 'test') {
+  // Do this as the first thing so that any code reading it knows the right env.
+  process.env.BABEL_ENV = 'development';
+  process.env.NODE_ENV = 'development';
+}
 
 // Makes the script crash on unhandled rejections instead of silently
 // ignoring them. In the future, promise rejections that are not handled will
@@ -54,9 +56,9 @@ function buildDev() {
       // Merge with the public folder
       copyPublicFolder();
       // Rename .dev and .prod versions of manifest to manifest.json
-      renameManifest();
+      renameManifest()
       // Start the webpack build
-      return build(previousFileSizes);
+      return build(previousFileSizes)
     })
     .then(
       ({ stats, previousFileSizes, warnings }) => {
@@ -85,7 +87,6 @@ function buildDev() {
           WARN_AFTER_BUNDLE_GZIP_SIZE,
           WARN_AFTER_CHUNK_GZIP_SIZE
         );
-        console.log();
 
         const appPackage = require(paths.appPackageJson);
         const publicUrl = paths.publicUrl;

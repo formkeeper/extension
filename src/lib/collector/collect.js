@@ -86,7 +86,7 @@ async function collect(fields, parentElement) {
 }
 
 /**
- * @obsolete
+ * @deprecated
  */
 class Collector {
   constructor(document) {

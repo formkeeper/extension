@@ -20,14 +20,14 @@
       "matches": [ "<all_urls>" ],
       "css": ["/css/root.css"],
       "js": [
-        "/static/js/content.js",
+        "/static/js/app.js",
         "/static/js/UNSAFE_cy-inject.js"
       ],
       "all_frames": true
     }
   ],
   "web_accessible_resources":[
-    "/static/css/content.css", "/static/media/*"
+    "/static/css/app.css", "/static/media/*"
   ],
   "content_security_policy": "script-src 'self' 'sha256-GgRxrVOKNdB4LrRsVPDSbzvfdV4UqglmviH9GoBJ5jk='; object-src 'self'"
 }
