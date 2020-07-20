@@ -42,7 +42,6 @@ jobs:
         CI: true
 
     - name: Run integration tests
-      uses: cypress-io/github-action@v2
       run: yarn test:cy
       env:
         CI: true
