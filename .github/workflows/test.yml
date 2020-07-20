@@ -22,10 +22,10 @@ jobs:
         # Save yarn cache
         path: '~/.cache/Cypress'
         # Create/Hit using OS and yarn.lock hash as key
-        key: ${{ runner.os }}-build-cypress-${{ hashFiles('**/yarn.lock') }}
+        key: ${{ runner.os }}-build-cypressv1-${{ hashFiles('**/yarn.lock') }}
         # Alternate keys
         restore-keys: |
-          ${{ runner.os }}-build-cypress-
+          ${{ runner.os }}-build-cypressv1-
 
     - name: Cache node_modules
       id: cache-node-modules
@@ -34,10 +34,10 @@ jobs:
         # Save yarn cache
         path: '**/node_modules'
         # Create/Hit using OS and yarn.lock hash as key
-        key: ${{ runner.os }}-build-modules-${{ hashFiles('**/yarn.lock') }}
+        key: ${{ runner.os }}-buildv3-${{ hashFiles('**/yarn.lock') }}
         # Alternate keys
         restore-keys: |
-          ${{ runner.os }}-build-modules-
+          ${{ runner.os }}-buildv3-
 
 
     - name: Install dependencies
