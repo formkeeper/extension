@@ -11,9 +11,21 @@ export function collectFieldSuccess(results) {
   };
 }
 
-export function collectFields(fields, parent) {
+/**
+ * collectFields triggers an async action.
+ *
+ * Instead of an action object collectFields will return a thunk to be invoked
+ * by the dispatch function, as soon as results are available collectFields
+ * will dispatch a collectFieldSuccess action.
+ *
+ * See collect for more info of how the collection process work.
+ *
+ * @async
+ * @param {HTMLElement} parent
+ */
+export function collectFields(parent) {
   return function (dispatch) {
-    collect(fields, parent).then(results => {
+    collect(parent).then(results => {
       dispatch(collectFieldSuccess(results));
     });
   };
