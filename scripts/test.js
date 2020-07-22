@@ -3,6 +3,8 @@ process.env.BABEL_ENV = "test";
 process.env.NODE_ENV = "test";
 process.env.PUBLIC_URL = "";
 
+const isCI = !!process.env.CI;
+
 // Makes the script crash on unhandled rejections instead of silently
 // ignoring them. In the future, promise rejections that are not handled will
 // terminate the Node.js process with a non-zero exit code.
@@ -31,7 +33,7 @@ async function runUnitTests(mode) {
   // print all test results
   argv.push("--verbose");
 
-  if (mode === modes.UNIT && !process.env.CI) {
+  if (mode === modes.UNIT && !isCI) {
     argv.push("--watch");
   } else {
   }
@@ -50,7 +52,7 @@ async function runIntegrationTests(mode) {
     port,
     server: paths.testWebsitePublic,
     open: false,
-    watch: false,
+    watch: !isCI,
   });
 
   // Wait for 200 response from browser-sync
@@ -66,7 +68,7 @@ async function runIntegrationTests(mode) {
   }
   console.log("[OK] Server is up.");
 
-  if (mode === modes.E2E && !process.env.CI) {
+  if (mode === modes.E2E && !isCI) {
     console.log("CY: Running interactive mode");
     await cy.open();
   } else {
