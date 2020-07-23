@@ -43,7 +43,7 @@ module.exports = {
   bail: true,
   // We generate sourcemaps in production. This is slow but gives good results.
   // You can exclude the *.map files from the build during deployment.
-  devtool: "cheap-module-source-map",
+  devtool: "inline-source-map",
   // In production, we only want to load the polyfills and the app code.
   entry: {
     // app: [require.resolve('./polyfills'), paths.appIndexJs],
@@ -270,7 +270,7 @@ module.exports = {
     // Minify the code.
     // new webpack.optimize.UglifyJsPlugin({
     //   compress: {
-    //     warnings: false,
+    //     warnings: true,
     //     // Disabled because of an issue with Uglify breaking seemingly valid
     //     // code:
     //     // https://github.com/facebookincubator/create-react-app/issues/2376
@@ -282,13 +282,13 @@ module.exports = {
     //     safari10: true,
     //   },
     //   output: {
-    //     comments: false,
+    //     comments: true,
     //     // Turned on because emoji and regex is not minified properly using
     //     // default
     //     // https://github.com/facebookincubator/create-react-app/issues/2488
     //     ascii_only: true,
     //   },
-    //   sourceMap: shouldUseSourceMap,
+    //   sourceMap: true,
     // }),
     // Note: this won't work without ExtractTextPlugin.extract(..) in `loaders`.
     new MiniCssExtractPlugin({

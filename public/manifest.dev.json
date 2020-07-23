@@ -27,7 +27,7 @@
     }
   ],
   "web_accessible_resources":[
-    "/static/css/app.css", "/static/media/*"
+    "/static/css/app.css", "/static/media/*", "/static/js/*.map"
   ],
   "content_security_policy": "script-src 'self' 'sha256-GgRxrVOKNdB4LrRsVPDSbzvfdV4UqglmviH9GoBJ5jk='; object-src 'self'"
 }
