@@ -1,0 +1,81 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  font-size: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+h2 {
+  font-size: 2.4rem;
+}
+
+h3 {
+  font-size: 2rem;
+}
+
+input, textarea, div[contenteditable] {
+  border-radius: 0;
+  border: 4px solid #333;
+  padding: 10px;
+}
+
+div[contenteditable] {
+  margin: 4px;
+}
+
+
+section.fields {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.field-type {
+  margin: 10px 0;
+}
+
+.field-type h3 {
+  margin: 10px 0;
+}
+
+.field-type.hidden {
+  border: 8px dashed #00000014;
+}
+
+.field-type.hidden > h3 {
+  margin: -8px;
+  background: black;
+  display: inline-block;
+  color: white;
+  padding: 4px 20px;
+}
+
+#hidden-2 {
+  display: none;
+}
+
+#hidden-3 {
+  opacity: 0;
+}
+
+#hidden-4 {
+  visibility: hidden;
+}
+
+#hidden-5 {
+  display: none;
+}
+
+#hidden-6 {
+  transform: scale(0);
+}
+
+#hidden-7 {
+  filter: opacity(0%);
+}

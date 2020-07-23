@@ -4,22 +4,51 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Test: Formkeeper</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>Testing </h1>
   <div id="healthcheck" style="display: none;"></div>
   <section class="fields">
-    <input type="text" id="test-1">
-    <label for="name">Name</label>
-    <input name="name" type="text" id="test-2">
-    <label for="password">Password</label>
-    <input type="password" id="pass-1">
-    <textarea name="editor-2" placeholder="Your text..." cols="30" rows="10"></textarea>
-    <textarea name="editor-2" placeholder="Your post..." cols="30" rows="10"></textarea>
-    <div class="dTR5cnlqdW16Y Tc3MjdtYWE3NGhy" contenteditable>This is a field</div>
-    <div spellcheck="false" contenteditable></div>
-    <div title="Rich editor" contenteditable></div>
-    <div contenteditable="false">This is not a field</div>
+    <h1>Field Elements Testing</h1>
+    <div class="valid">
+      <h2>Valid Fields</h2>
+      <div class="field-type inputs">
+        <h3>Input</h3>
+        <input type="text" id="test-1">
+        <input name="name" type="text" id="test-2">
+      </div>
+      <div class="field-type textareas">
+        <h3>Textarea</h3>
+        <textarea name="editor-2" placeholder="Your text..." cols="30" rows="10"></textarea>
+        <textarea name="editor-2" placeholder="Your post..." cols="30" rows="10"></textarea>
+      </div>
+      <div class="field-type divs">
+        <h3>Contenteditable divs</h3>
+        <div class="dTR5cnlqdW16Y Tc3MjdtYWE3NGhy" contenteditable>Contenteditable div with build generated classes</div>
+        <div spellcheck="false" contenteditable>Contenteditable div with spelling</div>
+        <div title="Rich editor" contenteditable>Contenteditable div</div>
+      </div>
+    </div>
+    <div class="invalid">
+      <h2>Invalid fields</h2>
+      <div class="field-type hidden">
+        <h3>Hidden</h3>
+        <input type="text" id="hidden-1" style="display: none;">
+        <input type="text" id="hidden-2">
+        <input type="text" id="hidden-3">
+        <input type="text" id="hidden-4" >
+        <input type="text" id="hidden-6">
+        <input type="text" id="hidden-7">
+        <input type="text" id="hidden-8" hidden>
+      </div>
+      <div class="field-type passwords">
+        <h3>Passwords</h3>
+        <input type="password" id="pass-1" value="password">
+      </div>
+      <div class="field-type divs">
+        <div contenteditable="false">Contenteditable=false div</div>
+      </div>
+    </div>
   </section>
 </body>
 </html>
