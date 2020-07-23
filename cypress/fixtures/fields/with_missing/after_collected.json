@@ -1,74 +1,74 @@
 {
   "fields": {
     "active": {
-      "98060994718edaa7d52f2e6e164792a891bf8b84a7944be87db0ccc92c704867": {
-        "selector": "input[type='text'][id='test-1']",
+      "72218321173abf46b0c0282d4c53cb9ba721ff5a949212e228b5c11a552b1b6d": {
+        "selector": "input[type=\"text\"][id=\"test-1\"]",
         "snapshots": []
       },
-      "284c7705a35f67ef8d448f892b2b9f2f154462db2cfdfc3e5b4fa7e01335256f": {
-        "selector": "input[name='name'][type='text'][id='test-2']",
+      "a690624fa86d3e42b1365914b3c22f867123474eabe57993896731da331d752e": {
+        "selector": "input[name=\"name\"][type=\"text\"][id=\"test-2\"]",
         "snapshots": []
       },
-      "aa4f401584ceead5e7b580b4ed601c1a260817b7773d0064631aa78689a16cd0": {
-        "selector": "textarea[name='editor-2'][placeholder='Your text...'][cols='30'][rows='10']",
+      "5c0072335a7dc1d1dc59a9d1550a8658f57062a2fb5a21b6aba7c5d899edb6c8": {
+        "selector": "textarea[name=\"editor-2\"][placeholder=\"Your text...\"][cols=\"30\"][rows=\"10\"]",
         "snapshots": []
       },
-      "16fdceed671db02f91b946727bc4a53ba994da211d0c78142c45fce6534c6a65": {
-        "selector": "textarea[name='editor-2'][placeholder='Your post...'][cols='30'][rows='10']",
+      "e97feb801e5af7b466a9190ee40160868561e6cc19c84cea818a969a4cce1aa5": {
+        "selector": "textarea[name=\"editor-2\"][placeholder=\"Your post...\"][cols=\"30\"][rows=\"10\"]",
         "snapshots": []
       },
-      "2efa87dc1cb24e2602f217ca83666aa98eb55d0623bc2c502ff9db4c0abd59a0": {
-        "selector": "div[class='dTR5cnlqdW16Y Tc3MjdtYWE3NGhy'][contenteditable='']",
+      "540036e91fceeb8ffb8ddd3c111bd99746c4be2ff254c5559bbb7ea1c9edbd87": {
+        "selector": "div[class=\"dTR5cnlqdW16Y Tc3MjdtYWE3NGhy\"][contenteditable=\"\"]",
         "snapshots": []
       },
-      "2b66c64bf3f1c8662649baeab1cfe6c6dec64371f55ba59263959e23d3980d21": {
-        "selector": "div[spellcheck='false'][contenteditable='']",
+      "5e4a85fba3c737f9e5116cc0d2b843b61e5067da37ef01c1997a8c3723ac1816": {
+        "selector": "div[spellcheck=\"false\"][contenteditable=\"\"]",
         "snapshots": []
       },
-      "9eee710731e6756269a21e54b96029df25633c6d2fb7b97fa37e4e99ee040204": {
-        "selector": "div[title='Rich editor'][contenteditable='']",
+      "512ce41b4517800f5bae7e0cdbd18ad8841bde3162e2c1647670a34bdce61bbd": {
+        "selector": "div[title=\"Rich editor\"][contenteditable=\"\"]",
         "snapshots": []
       },
-      "177cd6adf725f8a086cd788bc9ca68b8990f96f4bdb8838946294e8c07d46019": {
-        "selector": "div[contenteditable='false']",
+      "a2b276e0e0fa95bcc2579bdebb2874722fcd4fd11ed3e5250c5f55453a4c514d": {
+        "selector": "div[contenteditable=\"false\"]",
         "snapshots": []
       },
-      "639744e6916907743532263aec5a4b23350f787af7cf7fba28623c19055cb8bb": {
+      "cfe84bf1193fd4b2e0356147a87cfd970303cddc5856fd40ec93e205d22a01a1": {
           "snapshots": [],
-          "selector": "input[type='text'][id='hidden-1'][style='display: none;']"
+          "selector": "input[type=\"text\"][id=\"hidden-1\"][style=\"display: none;\"]"
        },
-      "5b9b77f7939e98d2a5d2798b5ea2c2770330de735a62c273c1e616e823af4458": {
+      "6965c50f4cd9b0a051e76f76396d5c3bb65d523ebe9ab53003e14546def130f4": {
           "snapshots": [],
-          "selector": "input[type='text'][id='hidden-2']"
+          "selector": "input[type=\"text\"][id=\"hidden-2\"]"
        },
-      "02062b9f65a55712c5ddf47a7e4d15c52e6846a3e3bd5a702c26b065576e84b0": {
+      "7a1d5a90a0c07de4e8f3171bc22c2e52a18fd12d8721609413602e66f0335aa9": {
          "snapshots": [],
-         "selector": "input[type='text'][id='hidden-3']"
+         "selector": "input[type=\"text\"][id=\"hidden-3\"]"
       },
-      "df6b431fe0039f68a598f02d3f59d9e16e2815bdb2236172734818ca568cab15": {
+      "ecc8056b7d2c145d58bb8747523c62a59bbd466ff634b52ec8858dec0b586e9e": {
          "snapshots": [],
-         "selector": "input[type='text'][id='hidden-4']"
+         "selector": "input[type=\"text\"][id=\"hidden-4\"]"
       },
-      "764c49fc90836dc2ee14c9042332d60831c8422c19bfe9ff7ab8abbf0162cccf": {
+      "7984a5e675a1e1ecacebe8b080b2df2d6be2e545ad607f2e898c19d7f929aad4": {
          "snapshots": [],
-         "selector": "input[type='text'][id='hidden-6']"
+         "selector": "input[type=\"text\"][id=\"hidden-6\"]"
       },
-      "94db878531ee396454cd7779e76de1c091db6bac2ff9b4b74f81f33b4a48c8b6": {
+      "eafc27c9737800e7006568229223c65bb2ff9f274512f6e14a491c2cda3d80ab": {
          "snapshots": [],
-         "selector": "input[type='text'][id='hidden-7']"
+         "selector": "input[type=\"text\"][id=\"hidden-7\"]"
       },
-      "378ea88885a1e810233b2fe1cf8de0f53048c46a72b2fbecd1bb5ad18de8345a": {
+      "72757e7cd8d927e2419ca74c6d5724ffb9fafe9d0d729a091c0985b22b11b59a": {
          "snapshots": [],
-         "selector": "input[type='text'][id='hidden-8'][hidden='']"
+         "selector": "input[type=\"text\"][id=\"hidden-8\"][hidden=\"\"]"
       }
     },
     "missing": [
       {
-        "selector": "input[name='name'][type='text'][id='test-4']",
+        "selector": "input[name=\"name\"][type=\"text\"][id=\"test-4\"]",
         "snapshots": []
       },
       {
-        "selector":"input[name='name'][type='text'][id='test-3']",
+        "selector":"input[name=\"name\"][type=\"text\"][id=\"test-3\"]",
         "snapshots":[]
       }
     ]

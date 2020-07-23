@@ -24,40 +24,38 @@ export function App() {
   const [state, dispatchFunc] = useReducer(rootReducer, initialState);
   const dispatch = withThunk(dispatchFunc);
 
-  if (isVisible) {
-    return (
-      <div id="ext-wrapper">
-        <div className="sidebar-wrapper">
-          <Frame
-            head={[
-              <link
-                key="content"
-                type="text/css"
-                rel="stylesheet"
-                href={chrome.runtime.getURL("/static/css/App.css")}
-              ></link>
-            ]}>
-            <FrameContextConsumer>
-              {
-                ({document, window}) => {
-                  return (
-                    <FieldsDispatch.Provider value={dispatch}>
-                      <Page
-                        document={document}
-                        window={window}
-                        fields={state.fields}/>
-                    </FieldsDispatch.Provider>
+  const style = isVisible ? { display: "block"} : { display: "none" };
+  return (
+    <div id="ext-wrapper" style={style}>
+      <div className="sidebar-wrapper">
+        <Frame
+          head={[
+            <link
+              key="content"
+              type="text/css"
+              rel="stylesheet"
+              href={chrome.runtime.getURL("/static/css/app.css")}
+            ></link>
+          ]}>
+          <FrameContextConsumer>
+            {
+              ({document, window}) => {
+                return (
+                  <FieldsDispatch.Provider value={dispatch}>
+                    <Page
+                      document={document}
+                      window={window}
+                      fields={state.fields}/>
+                  </FieldsDispatch.Provider>
 
-                  );
-                }
+                );
               }
-            </FrameContextConsumer>
-          </Frame>
-        </div>
+            }
+          </FrameContextConsumer>
+        </Frame>
       </div>
-    );
-  }
-  return null;
+    </div>
+  );
 }
 
 const app = document.createElement("div");

@@ -2,10 +2,10 @@ import { useContext, useEffect } from "react";
 import { FieldsDispatch } from "../global/context";
 import { collectFields } from "../actions";
 
-function useFieldCollector({ document, location }) {
+function useFieldCollector(location) {
   const dispatch = useContext(FieldsDispatch);
   useEffect(() => {
-    dispatch(collectFields(document));
+    dispatch(collectFields());
   /*
     We want collectFields to only be dispatched when location changes at
     startup. Also, dispatch is just a wrapped middleware of the stable

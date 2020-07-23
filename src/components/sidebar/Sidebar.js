@@ -1,12 +1,14 @@
 import React from "react";
 import "./Sidebar.css";
 
-function Sidebar() {
+function Sidebar({ fields }) {
   return (
     <div className="sidebar">
-      <p>
-        Sidebar
-      </p>
+      <ul>
+        { Object.keys(fields.active).map(fieldHash => {
+          return (<li key={fieldHash}>{fieldHash}</li>);
+        })}
+      </ul>
     </div>
   );
 }
