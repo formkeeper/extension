@@ -20,7 +20,7 @@ class ID {
       objective is to use as few and as unique attributes as possible.
     */
     const attrStr = Array.from(el.attributes)
-      .reduce((str, attr) => str += `[${attr.nodeName}='${attr.nodeValue}']`, "");
+      .reduce((str, attr) => str += `[${attr.nodeName}="${attr.nodeValue}"]`, "");
     this._selector = `${el.localName}${attrStr}`;
     this._hash = await SHA256(this._selector);
 
