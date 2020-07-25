@@ -17,7 +17,7 @@ const fieldSelector =
  *
  * Storage layer requires a get method.
  *
- * collect is meant to be detached from react logic, so it doesn't use reducers
+ * collect is meant to be decoupled from react logic, so it doesn't use reducers
  * to create the data
  *
  * @param {HTMLElement} [parent=window.document] - Parent element from which
