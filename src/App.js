@@ -27,33 +27,31 @@ export function App() {
   const style = isVisible ? { display: "block"} : { display: "none" };
   return (
     <div id="ext-wrapper" style={style}>
-      <div className="sidebar-wrapper">
-        <Frame
-          head={[
-            <link
-              key="content"
-              type="text/css"
-              rel="stylesheet"
-              href={chrome.runtime.getURL("/static/css/app.css")}
-            ></link>
-          ]}>
-          <FrameContextConsumer>
-            {
-              ({document, window}) => {
-                return (
-                  <FieldsDispatch.Provider value={dispatch}>
-                    <Page
-                      document={document}
-                      window={window}
-                      fields={state.fields}/>
-                  </FieldsDispatch.Provider>
+      <Frame
+        head={[
+          <link
+            key="content"
+            type="text/css"
+            rel="stylesheet"
+            href={chrome.runtime.getURL("/static/css/app.css")}
+          ></link>
+        ]}>
+        <FrameContextConsumer>
+          {
+            ({document, window}) => {
+              return (
+                <FieldsDispatch.Provider value={dispatch}>
+                  <Page
+                    document={document}
+                    window={window}
+                    fields={state.fields}/>
+                </FieldsDispatch.Provider>
 
-                );
-              }
+              );
             }
-          </FrameContextConsumer>
-        </Frame>
-      </div>
+          }
+        </FrameContextConsumer>
+      </Frame>
     </div>
   );
 }
