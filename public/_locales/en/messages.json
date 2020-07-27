@@ -1,0 +1,58 @@
+{
+  "yesterday": {
+    "message": "Yesterday"
+  },
+  "hours_ago": {
+    "message": "$hh$ hours ago",
+    "description": "Hours ago since a given date. Expects hours parameter to be passed in.",
+    "placeholders" : {
+      "hh": {
+        "content": "$1",
+        "example": "2"
+      }
+    }
+  },
+  "one_hour_ago": {
+    "message": "an hour ago"
+  },
+  "mins_ago": {
+    "message": "$mm$ minutes ago",
+    "description": "Minutes ago since a given date. Expects minutes parameter to be passed in.",
+    "placeholders" : {
+      "mm": {
+        "content": "$1",
+        "example": "30"
+      }
+    }
+  },
+  "one_min_ago": {
+    "message": "a minute ago"
+  },
+  "secs_ago": {
+    "message": "$ss$ hours ago",
+    "description": "Seconds ago since a given date. Expects seconds parameter to be passed in.",
+    "placeholders" : {
+      "ss": {
+        "content": "$1",
+        "example": "52"
+      }
+    }
+  },
+  "one_sec_ago": {
+    "message": "a second ago"
+  },
+  "day_and_month": {
+    "message": "$$dd$$/$$MM$$",
+    "description": "Day and month format since it may change among countries",
+    "placeholders" : {
+      "dd": {
+        "content": "$1",
+        "example": "1"
+      },
+      "MM": {
+        "content": "$2",
+        "example": "12"
+      }
+    }
+  }
+}

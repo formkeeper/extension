@@ -3,6 +3,7 @@
   "name": "Formkeeper",
   "version": "0.1",
   "manifest_version": 2,
+  "default_locale": "en",
   "background": {
     "scripts": ["app/background.js"]
   },
