@@ -4,3 +4,18 @@ export function withThunk(dispatch) {
       ? actionOrThunk(dispatch)
       : dispatch(actionOrThunk);
 }
+
+export function debounce(fn, wait, ctx) {
+  let timer;
+
+  return (...args) => {
+    if (timer) {
+      clearTimeout(timer);
+    }
+
+    timer = setTimeout(() => {
+      fn.apply(ctx, args);
+      timer = null;
+    }, wait);
+  };
+}

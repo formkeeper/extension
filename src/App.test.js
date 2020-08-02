@@ -3,7 +3,7 @@ import { configure, mount } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import { act } from "react-dom/test-utils";
 import { App } from "./App";
-import * as useFieldCollector from "./hooks/useFieldCollector";
+import * as useCollector from "./hooks/useCollector";
 
 import Setup from "./test/helpers/setup";
 
@@ -14,7 +14,7 @@ describe("<App />", () => {
   let chromeStub = Setup.createChromeStub();
 
   beforeEach(() => {
-    jest.spyOn(useFieldCollector, "default")
+    jest.spyOn(useCollector, "default")
       .mockImplementation(() => {});
     wrapper = mount(<App />);
   });
@@ -36,7 +36,7 @@ describe("<App />", () => {
     });
     wrapper.update();
 
-    const AppHTML = "<div id=\"ext-wrapper\"><div class=\"sidebar-wrapper\"><iframe></iframe></div></div>";
+    const AppHTML = "<div class=\"ext-wrapper\"><div class=\"sidebar-wrapper\"><iframe></iframe></div></div>";
     expect(wrapper.html()).toBe(AppHTML.trim());
   });
 });

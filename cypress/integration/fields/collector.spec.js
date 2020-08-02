@@ -1,8 +1,8 @@
 import newSetup from "../helpers/setup";
 import ID from "../../../src/lib/collector/id";
 import AsyncQueue from "../../../src/lib/collector/queue";
-import collect from "../../../src/lib/collector";
-import { CollectorStorage } from "../../../src/lib/collector/storage";
+import retrieveAndCollect from "../../../src/lib/collector";
+import Storage from "../../../src/lib/storage";
 
 function removeDOMElems(elems) {
   for (let hash in elems) {
@@ -10,7 +10,7 @@ function removeDOMElems(elems) {
   }
 }
 
-class FakeStorage extends CollectorStorage {
+class FakeStorage extends Storage {
   constructor(store) {
     super(store);
     this._store = store;
@@ -21,7 +21,7 @@ class FakeStorage extends CollectorStorage {
   }
 }
 
-class EmptyStorage extends CollectorStorage {
+class EmptyStorage extends Storage {
   async get() {
     return Promise.resolve(null);
   }
@@ -38,13 +38,13 @@ context("Fields", () => {
         const $input = $doc.getElementById("test-1");
 
         const id = new ID($doc);
-        id.generate($input).then(() => {
+        cy.wrap(id.generate($input)).then(() => {
           expect(id.isUnique())
             .to.equal(true);
-          expect(id.get())
-            .to.equal("98060994718edaa7d52f2e6e164792a891bf8b84a7944be87db0ccc92c704867");
           expect(id.getSelector())
-            .to.equal("input[type='text'][id='test-1']");
+            .to.equal("input[type=\"text\"][id=\"test-1\"]");
+          expect(id.get())
+            .to.equal("72218321173abf46b0c0282d4c53cb9ba721ff5a949212e228b5c11a552b1b6d");
         });
       });
     });
@@ -93,7 +93,7 @@ context("Fields", () => {
       cy.fixture("fields/store.json").then(store => {
         cy.document().then($doc => {
           const storage = new EmptyStorage();
-          cy.wrap(collect($doc, storage)).then(results => {
+          cy.wrap(retrieveAndCollect(storage, $doc)).then(results => {
             removeDOMElems(results.fields.active);
             expect(results.fields.active).to.deep.equal(store.fields.active);
           });
@@ -109,7 +109,7 @@ context("Fields", () => {
           cy.document().then($doc => {
             const storage = new FakeStorage(store);
 
-            cy.wrap(collect($doc, storage)).then(results => {
+            cy.wrap(retrieveAndCollect(storage, $doc)).then(results => {
               removeDOMElems(results.fields.active);
               expect(results.fields.active)
                 .to.deep.equal(collected.fields.active);
@@ -129,7 +129,7 @@ context("Fields", () => {
           cy.document().then($doc => {
             const storage = new FakeStorage(store);
 
-            cy.wrap(collect($doc, storage)).then(results => {
+            cy.wrap(retrieveAndCollect(storage, $doc)).then(results => {
               removeDOMElems(results.fields.active);
               expect(results.fields.active)
                 .to.deep.equal(collected.fields.active);

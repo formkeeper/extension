@@ -29,7 +29,7 @@
     "message": "a minute ago"
   },
   "secs_ago": {
-    "message": "$ss$ hours ago",
+    "message": "$ss$ seconds ago",
     "description": "Seconds ago since a given date. Expects seconds parameter to be passed in.",
     "placeholders" : {
       "ss": {
@@ -41,8 +41,11 @@
   "one_sec_ago": {
     "message": "a second ago"
   },
+  "just_now": {
+    "message": "just now"
+  },
   "day_and_month": {
-    "message": "$$dd$$/$$MM$$",
+    "message": "$dd$/$MM$",
     "description": "Day and month format since it may change among countries",
     "placeholders" : {
       "dd": {

@@ -26,7 +26,7 @@ export function App() {
 
   const style = isVisible ? { display: "block"} : { display: "none" };
   return (
-    <div id="ext-wrapper" style={style}>
+    <div className="ext-wrapper" style={style}>
       <Frame
         head={[
           <link
@@ -44,7 +44,8 @@ export function App() {
                   <Page
                     document={document}
                     window={window}
-                    fields={state.fields}/>
+                    fields={state.fields}
+                    snapshots={state.snapshots}/>
                 </FieldsDispatch.Provider>
 
               );

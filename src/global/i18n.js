@@ -7,6 +7,7 @@ const globals = {
   secs_ago: "secs_ago",
   one_sec_ago: "one_sec_ago",
   day_and_month: "day_and_month",
+  just_now: "just_now",
 };
 
 export default globals;

@@ -1,6 +1,6 @@
 import ID from "./id";
 import AsyncQueue from "./queue";
-import ChromeStorage from "./storage";
+import ChromeStorage from "../storage/chrome";
 import { isEmptyObject } from "../utils/common";
 
 const fieldSelector =
@@ -12,26 +12,25 @@ const fieldSelector =
   `;
 
 /**
- * collect finds the field elements on the page and reconciliates them with the
- * old ones retrieved from the storage layer.
+ * retrieveAndCollect retrieves the old state from the storage layer, collect
+ * all the field elements on the page and reconciliates them with the old state
  *
- * Storage layer requires a get method.
+ * retrieveAndCollect is meant to be decoupled from react logic, so it doesn't
+ * use action creators to mutate the data, instead it recreates the state to be
+ * consumed by the action creators and reducers.
  *
- * collect is meant to be decoupled from react logic, so it doesn't use reducers
- * to create the data
- *
+ * @param {InstanceType} [storage=ChromeStorage] - Storage layer to be
+ * reconciliated with new state. Default: ChromeStorage
  * @param {HTMLElement} [parent=window.document] - Parent element from which
  * collection will take place. Default: window.document
- * @param {InstanceType} [storage=ChromeStorage] - Storage layer to reconciliate
- * with collected fields. Default: ChromeStorage
  */
-async function collect(parent, storage) {
-  parent = parent || window.document;
+async function retrieveAndCollect(storage, parent) {
   storage = storage || new ChromeStorage();
+  parent = parent || window.document;
 
-  let oldFields;
+  let prevState;
   try {
-    oldFields = await storage.get();
+    prevState = await storage.get();
   } catch(err) {
     throw err;
   }
@@ -41,6 +40,7 @@ async function collect(parent, storage) {
       active: {},
       missing: [],
     },
+    snapshots: [],
     warns: [],
   };
   // Old fields pending to reconciliate
@@ -49,7 +49,8 @@ async function collect(parent, storage) {
       active: {},
       missing: [],
     },
-    ...oldFields
+    snapshots: [],
+    ...prevState,
   };
 
   const $elems = parent.querySelectorAll(fieldSelector);
@@ -85,13 +86,10 @@ async function collect(parent, storage) {
       }
 
       const fieldHash = id.get();
-      const oldField = toReconciliate.fields.active[fieldHash] || {};
-      const newField = {
-        // To be overwritten by oldField:
-        snapshots: [],
+      const prevFieldState = toReconciliate.fields.active[fieldHash] || {};
+      const newFieldState = {
+        ...prevFieldState,
         selector: id.getSelector(),
-        ...oldField,
-        // To overwrite oldField:
         el: $el,
       };
 
@@ -99,21 +97,29 @@ async function collect(parent, storage) {
       // remaining missing ones which couldn't be found by hash
       // pending reconciliation.
       delete toReconciliate.fields.active[fieldHash];
-      results.fields.active[fieldHash] = newField;
+      results.fields.active[fieldHash] = newFieldState;
       resolve(true);
     });
   });
   await queue.waitForGroup();
 
-  // At this point non-reconciliated old active items are fields whose DOM
-  // element is missing (doesn't exist on the page anymore or changed attrs
   if (!isEmptyObject(toReconciliate.fields.active)) {
-    results.fields.missing = toReconciliate.fields.missing.concat(
-      Object.values(toReconciliate.fields.active)
-    );
+    results.fields.missing = [
+      ...toReconciliate.fields.missing,
+      // At this point non-reconciliated old active items are fields whose DOM
+      // element is missing (doesn't exist on the page anymore or changed attrs)
+      ...Object.entries(toReconciliate.fields.active).map(keyValuePair =>
+        ({
+          "hash": keyValuePair[0],
+          ...keyValuePair[1]
+        })
+      )
+    ];
   }
 
+  // No op. is needed to reconciliate snapshots, we just retrieve them
+  results.snapshots = toReconciliate.snapshots;
   return results;
 }
 
-export default collect;
+export default retrieveAndCollect;

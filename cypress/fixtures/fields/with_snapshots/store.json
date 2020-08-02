@@ -2,93 +2,83 @@
   "fields": {
     "active": {
       "72218321173abf46b0c0282d4c53cb9ba721ff5a949212e228b5c11a552b1b6d": {
-        "selector": "input[type=\"text\"][id=\"test-1\"]",
-        "snapshots": [{
-          "hash": "3fd58b0f94a298646a653d6771ba939aaa944ebb6363a8804f6f1e1ffdccee3b",
-          "time": { "ts": 1593709449314, "pretty": "2/6 19:04:09" },
-          "contents": "This is a example ÜTF-8 Cóntënt text content for testing!"
-        },
-        {
-          "hash": "3fd58b0f94a298646a653d6771ba939aaa944ebb6363a8804f6f1e1ffdccee3b",
-          "time": { "ts": 1593709449314, "pretty": "2/6 19:04:10" },
-          "contents": "This is a example ÜTF-8 Cóntënt text content for testing!"
-        },
-        {
-          "hash": "3fd58b0f94a298646a653d6771ba939aaa944ebb6363a8804f6f1e1ffdccee3b",
-          "time": { "ts": 1593709449314, "pretty": "2/6 19:04:10" },
-          "contents": "This is a example ÜTF-8 Cóntënt text content for testing!"
-        }]
+        "selector": "input[type=\"text\"][id=\"test-1\"]"
       },
       "a690624fa86d3e42b1365914b3c22f867123474eabe57993896731da331d752e": {
-        "selector": "input[name=\"name\"][type=\"text\"][id=\"test-2\"]",
-        "snapshots": []
+        "selector": "input[name=\"name\"][type=\"text\"][id=\"test-2\"]"
       },
       "5c0072335a7dc1d1dc59a9d1550a8658f57062a2fb5a21b6aba7c5d899edb6c8": {
-        "selector": "textarea[name=\"editor-2\"][placeholder=\"Your text...\"][cols=\"30\"][rows=\"10\"]",
-        "snapshots": []
+        "selector": "textarea[name=\"editor-2\"][placeholder=\"Your text...\"][cols=\"30\"][rows=\"10\"]"
       },
       "e97feb801e5af7b466a9190ee40160868561e6cc19c84cea818a969a4cce1aa5": {
-        "selector": "textarea[name=\"editor-2\"][placeholder=\"Your post...\"][cols=\"30\"][rows=\"10\"]",
-        "snapshots": []
+        "selector": "textarea[name=\"editor-2\"][placeholder=\"Your post...\"][cols=\"30\"][rows=\"10\"]"
       },
       "540036e91fceeb8ffb8ddd3c111bd99746c4be2ff254c5559bbb7ea1c9edbd87": {
-        "selector": "div[class=\"dTR5cnlqdW16Y Tc3MjdtYWE3NGhy\"][contenteditable=\"\"]",
-        "snapshots": []
+        "selector": "div[class=\"dTR5cnlqdW16Y Tc3MjdtYWE3NGhy\"][contenteditable=\"\"]"
       },
       "5e4a85fba3c737f9e5116cc0d2b843b61e5067da37ef01c1997a8c3723ac1816": {
-        "selector": "div[spellcheck=\"false\"][contenteditable=\"\"]",
-        "snapshots": []
+        "selector": "div[spellcheck=\"false\"][contenteditable=\"\"]"
       },
       "512ce41b4517800f5bae7e0cdbd18ad8841bde3162e2c1647670a34bdce61bbd": {
-        "selector": "div[title=\"Rich editor\"][contenteditable=\"\"]",
-        "snapshots": []
+        "selector": "div[title=\"Rich editor\"][contenteditable=\"\"]"
       },
       "a2b276e0e0fa95bcc2579bdebb2874722fcd4fd11ed3e5250c5f55453a4c514d": {
-        "selector": "div[contenteditable=\"false\"]",
-        "snapshots": []
+        "selector": "div[contenteditable=\"false\"]"
       },
       "1e7821ffb7836b652e1c9fcfff9c1193ca8efa1f772e5eb89e41276bebca0909": {
-        "selector":"input[name=\"name\"][type=\"text\"][id=\"test-3\"]",
-        "snapshots":[{
-          "hash": "3fd58b0f94a298646a653d6771ba939aaa944ebb6363a8804f6f1e1ffdccee3b",
-          "time": { "ts": 1593709449314, "pretty": "2/6 19:04:11" },
-          "contents": "This is a example ÜTF-8 Cóntënt text content for testing!"
-        }]
+        "selector":"input[name=\"name\"][type=\"text\"][id=\"test-3\"]"
       },
       "cfe84bf1193fd4b2e0356147a87cfd970303cddc5856fd40ec93e205d22a01a1": {
-          "snapshots": [],
-          "selector": "input[type=\"text\"][id=\"hidden-1\"][style=\"display: none;\"]"
+        "selector": "input[type=\"text\"][id=\"hidden-1\"][style=\"display: none;\"]"
        },
       "6965c50f4cd9b0a051e76f76396d5c3bb65d523ebe9ab53003e14546def130f4": {
-          "snapshots": [],
-          "selector": "input[type=\"text\"][id=\"hidden-2\"]"
+        "selector": "input[type=\"text\"][id=\"hidden-2\"]"
        },
       "7a1d5a90a0c07de4e8f3171bc22c2e52a18fd12d8721609413602e66f0335aa9": {
-         "snapshots": [],
-         "selector": "input[type=\"text\"][id=\"hidden-3\"]"
+        "selector": "input[type=\"text\"][id=\"hidden-3\"]"
       },
       "ecc8056b7d2c145d58bb8747523c62a59bbd466ff634b52ec8858dec0b586e9e": {
-         "snapshots": [],
-         "selector": "input[type=\"text\"][id=\"hidden-4\"]"
+        "selector": "input[type=\"text\"][id=\"hidden-4\"]"
       },
       "7984a5e675a1e1ecacebe8b080b2df2d6be2e545ad607f2e898c19d7f929aad4": {
-         "snapshots": [],
-         "selector": "input[type=\"text\"][id=\"hidden-6\"]"
+        "selector": "input[type=\"text\"][id=\"hidden-6\"]"
       },
       "eafc27c9737800e7006568229223c65bb2ff9f274512f6e14a491c2cda3d80ab": {
-         "snapshots": [],
-         "selector": "input[type=\"text\"][id=\"hidden-7\"]"
+        "selector": "input[type=\"text\"][id=\"hidden-7\"]"
       },
       "72757e7cd8d927e2419ca74c6d5724ffb9fafe9d0d729a091c0985b22b11b59a": {
-         "snapshots": [],
-         "selector": "input[type=\"text\"][id=\"hidden-8\"][hidden=\"\"]"
+        "selector": "input[type=\"text\"][id=\"hidden-8\"][hidden=\"\"]"
       }
     },
     "missing": [
       {
-        "selector": "input[name=\"name\"][type=\"text\"][id=\"test-4\"]",
-        "snapshots": []
+        "hash": "d0f578635bd444bc3d0fcaed87e0ac4d9787c3447ed80ce92922ced0f4f0f0ad",
+        "selector": "input[name=\"name\"][type=\"text\"][id=\"test-4\"]"
       }
     ]
-  }
+  },
+  "snapshots": [
+    {
+      "time": { "ts": 1593709449000 },
+      "contents": {
+        "72218321173abf46b0c0282d4c53cb9ba721ff5a949212e228b5c11a552b1b6d": "This is the field one",
+        "a690624fa86d3e42b1365914b3c22f867123474eabe57993896731da331d752e": "This is the field two",
+        "1e7821ffb7836b652e1c9fcfff9c1193ca8efa1f772e5eb89e41276bebca0909": "Snapshot of old missing element!"
+      }
+    },
+    {
+      "time": { "ts": 1593709451000 },
+      "contents": {
+        "72218321173abf46b0c0282d4c53cb9ba721ff5a949212e228b5c11a552b1b6d": "This is the field one changing",
+        "a690624fa86d3e42b1365914b3c22f867123474eabe57993896731da331d752e": "This is the field two"
+      }
+    },
+    {
+      "time": { "ts": 1593709501000 },
+      "contents": {
+        "72218321173abf46b0c0282d4c53cb9ba721ff5a949212e228b5c11a552b1b6d": "This is the field one changing",
+        "a690624fa86d3e42b1365914b3c22f867123474eabe57993896731da331d752e": "Now is two, the one that changes"
+      }
+    }
+  ]
 }

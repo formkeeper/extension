@@ -118,15 +118,18 @@ class TimeFormatter {
       }
       return i18n.get(i18n.vars.secs_ago, prettify(diff.secs));
 
+    } else if (0 < diff.ms && diff.ms < 1000) {
+      return i18n.get(i18n.vars.just_now);
+
     } else {
       const d = this._date;
       const [day, month, hours, mins] = [
         d.getDate(), d.getMonth(), d.getHours(), d.getMinutes()
       ];
 
-      const hhSep = this._opts.DAY_MONTH_SEPARATOR;
+      const hhSep = this._opts.HOUR_SEPARATOR;
       const prettyMins = prettifyDoubleDigits(mins);
-      const dayAndMonth = i18n.get(i18n.vars.day_and_month, [day, month]);
+      const dayAndMonth = i18n.get(i18n.vars.day_and_month, day, month);
       return `${dayAndMonth} ${hours}${hhSep}${prettyMins}`;
     }
   }
