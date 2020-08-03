@@ -2,10 +2,10 @@ import * as React from "react";
 import { configure, mount } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import { act } from "react-dom/test-utils";
-import { App } from "./App";
-import * as useCollector from "./hooks/useCollector";
 
 import Setup from "./test/helpers/setup";
+
+jest.mock("./components/page/Page", () => () => null);
 
 configure({ adapter: new Adapter() });
 
@@ -14,8 +14,7 @@ describe("<App />", () => {
   let chromeStub = Setup.createChromeStub();
 
   beforeEach(() => {
-    jest.spyOn(useCollector, "default")
-      .mockImplementation(() => {});
+    const { App } = require("./App");
     wrapper = mount(<App />);
   });
 
@@ -23,20 +22,22 @@ describe("<App />", () => {
     jest.clearAllMocks();
   });
 
+  const nonVisibleExtension = "<div class=\"ext-wrapper\" style=\"display: none;\"><iframe></iframe></div>";
+  const visibleExtension = "<div class=\"ext-wrapper\" style=\"display: block;\"><iframe></iframe></div>";
+
   it("renders without crashing", () => {
-    expect(wrapper.html()).toBe(null);
+    expect(wrapper.html()).toBe(nonVisibleExtension);
   });
 
 
   it("visible when badged is clicked", () => {
-    expect(wrapper.html()).toBe(null);
+    expect(wrapper.html()).toBe(nonVisibleExtension);
 
     act(() => {
       chromeStub.dispatchMessage("on_badge_click");
     });
     wrapper.update();
 
-    const AppHTML = "<div class=\"ext-wrapper\"><div class=\"sidebar-wrapper\"><iframe></iframe></div></div>";
-    expect(wrapper.html()).toBe(AppHTML.trim());
+    expect(wrapper.html()).toBe(visibleExtension);
   });
 });

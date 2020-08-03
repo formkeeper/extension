@@ -43,12 +43,12 @@ class Setup {
   static createChromeStub() {
     let chromeStub = null;
 
-    if (window.chrome) {
+    if (global.chrome) {
       return;
     }
 
     chromeStub = new ChromeStub();
-    window["chrome"] = chromeStub;
+    global["chrome"] = chromeStub;
 
     return chromeStub;
   }

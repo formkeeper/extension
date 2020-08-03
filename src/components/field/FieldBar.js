@@ -39,6 +39,10 @@ function FieldBar({ field, fieldHash }) {
     return function cleanup() {
       $el.removeEventListener("input", debouncedInput);
     };
+  /*
+    dispatch and storage are guaranteed to be stable
+  */
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selector, fieldHash]);
 
   return (

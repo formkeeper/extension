@@ -4,6 +4,6 @@ import Sidebar from "./Sidebar";
 
 it("renders without crashing", () => {
   const div = document.createElement("div");
-  ReactDOM.render(<Sidebar />, div);
+  ReactDOM.render(<Sidebar snapshots={[]}/>, div);
   ReactDOM.unmountComponentAtNode(div);
 });
