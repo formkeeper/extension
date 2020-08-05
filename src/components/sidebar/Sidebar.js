@@ -8,23 +8,40 @@ function prettifyTime(ts) {
   return timefmt.getPrettyString();
 }
 
+function Snapshot({ snapshot }) {
+  return (
+    <div className="snapshot">
+      <h3>{prettifyTime(snapshot.time.ts)}</h3>
+      <ul>
+        {Object.keys(snapshot.contents).map(fieldHash => {
+          return (
+            <li key={fieldHash}>{snapshot.contents[fieldHash]}</li>
+          );
+        })}
+      </ul>
+    </div>
+  );
+}
+
+function SnapshotList({ snapshots }) {
+  return (
+    <div className="snapshot-list">{
+      snapshots.map(snapshot =>
+        <Snapshot
+          key={snapshot.time.ts}
+          snapshot={snapshot}
+        />
+      )}
+    </div>
+  );
+}
+
 function Sidebar({ snapshots }) {
   return (
     <div className="sidebar">
-      {snapshots.map(snapshot => {
-        return (
-          <div key={snapshot.time.ts}>
-            <h3>{prettifyTime(snapshot.time.ts)}</h3>
-            <ul>
-              {Object.keys(snapshot.contents).map(fieldHash => {
-                return (
-                  <li key={fieldHash}>{snapshot.contents[fieldHash]}</li>
-                );
-              })}
-            </ul>
-          </div>
-        );
-      })}
+      <div className="prev">↑</div>
+      <SnapshotList snapshots={snapshots}/>
+      <div className="next">↓</div>
     </div>
   );
 }
