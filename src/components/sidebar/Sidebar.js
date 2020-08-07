@@ -1,46 +1,19 @@
 import React from "react";
+
+import useExtensionVisibility from "../../hooks/useExtensionVisibility";
+import SnapshotList from "../snapshot/SnapshotList";
 import "./Sidebar.css";
-import TimeFormatter from "../../lib/utils/time";
 
-function prettifyTime(ts) {
-  const date = new Date(parseInt(ts));
-  const timefmt = new TimeFormatter(date);
-  return timefmt.getPrettyString();
-}
-
-function Snapshot({ snapshot }) {
-  return (
-    <div className="snapshot">
-      <h3>{prettifyTime(snapshot.time.ts)}</h3>
-      <ul>
-        {Object.keys(snapshot.contents).map(fieldHash => {
-          return (
-            <li key={fieldHash}>{snapshot.contents[fieldHash]}</li>
-          );
-        })}
-      </ul>
-    </div>
-  );
-}
-
-function SnapshotList({ snapshots }) {
-  return (
-    <div className="snapshot-list">{
-      snapshots.map(snapshot =>
-        <Snapshot
-          key={snapshot.time.ts}
-          snapshot={snapshot}
-        />
-      )}
-    </div>
-  );
-}
-
-function Sidebar({ snapshots }) {
+function Sidebar({ snapshots, fields }) {
+  const isVisible = useExtensionVisibility();
   return (
     <div className="sidebar">
       <div className="prev">↑</div>
-      <SnapshotList snapshots={snapshots}/>
+      <SnapshotList
+        snapshots={snapshots}
+        isVisible={isVisible}
+        fields={fields}
+      />
       <div className="next">↓</div>
     </div>
   );

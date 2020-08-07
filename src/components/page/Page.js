@@ -18,7 +18,7 @@ function Page({ window, fields, snapshots }) {
   return (
     <div id="sidebar-wrapper">
       <StorageDispatch.Provider value={storage}>
-        <Sidebar snapshots={snapshots}/>
+        <Sidebar snapshots={snapshots} fields={fields}/>
         <FieldBarWrapper fields={fields}/>
       </StorageDispatch.Provider>
     </div>

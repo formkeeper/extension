@@ -66,38 +66,6 @@ export function persistAndAddSnapshot(storage, fieldHash, content) {
 }
 
 /**
- * addSnapshots returns a thunk that computes the SHA256 of the snapshot's
- * content and attempts to persist it to a storage layer. If successful
- * addSnapshotSuccess will be dispatched.
- *
- * @async
- * @param {String} contents
- */
-/*
-export function addSnapshot(fieldHash, contents) {
-  return function(dispatch) {
-    SHA256(contents).then(contentsHash => {
-      const ts = Date.now();
-      const snapshot = {
-        time: { ts },
-        hash: contentsHash,
-        contents,
-      };
-
-      new ChromeStorage().addSnapshot(fieldHash, snapshot).then(store => {
-        if (!store) {
-          throw new Error("addSnapshot: Error while trying to save snapshot");
-        }
-        dispatch(
-          addSnapshotSuccess(fieldHash, snapshot)
-        );
-      });
-    });
-  };
-}
-*/
-
-/**
  * retrieveAndCollectFields triggers an async action.
  *
  * Instead of an action object collectFields will return a thunk to be invoked
