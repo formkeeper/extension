@@ -1,12 +1,81 @@
-import React from "react";
+import React, { memo, Fragment, useRef, useState, useEffect, useCallback } from "react";
 import { FixedSizeList as List } from "react-window";
 
+import { areFieldsEqual, areShallowEqual, areSnapshotsEqual } from "../../lib/diff/areEqual";
 import SnapshotItem from "./Snapshot";
 
 const SnapshotKey = (index, data) =>
   data[index].time.ts;
 
-function SnapshotList({ snapshots, isVisible, fields}) {
+function areSnapshotListEqual(prevProps, nextProps) {
+  const {
+    fields: prevFields,
+    snapshots: prevSnapshots,
+    ...prevRestProps
+  } = prevProps;
+  const {
+    fields: nextFields,
+    snapshots: nextSnapshots,
+    ...nextRestProps
+  } = nextProps;
+
+  return areSnapshotsEqual(prevSnapshots, nextSnapshots)
+    && areShallowEqual(prevRestProps, nextRestProps)
+    && areFieldsEqual(prevFields, nextFields);
+}
+
+const ListNavButton = memo(({ handler, children, className, isVisible}) => {
+  const style = isVisible ? { display: "block" } : { display: "none"};
+  return (
+    <div className={className} onClick={handler} style={style}>
+      {children}
+    </div>
+  );
+});
+
+const ListPrevButton = memo(({ handler, isVisible }) => {
+  return (
+    <ListNavButton
+      className="prev"
+      handler={handler}
+      isVisible={isVisible}
+    >
+    ↑
+    </ListNavButton>
+  );
+});
+
+const ListNextButton = memo(({ handler, isVisible }) => {
+  return (
+    <ListNavButton
+      className="next"
+      handler={handler}
+      isVisible={isVisible}
+    >
+    ↓
+    </ListNavButton>
+  );
+});
+
+
+const SnapshotList = memo(({
+  snapshots,
+  fields,
+  isVisible,
+  setPosition,
+  listRef
+}) => {
+  useEffect(() => {
+    listRef.current.scrollToItem(snapshots.length - 1);
+  });
+
+  const onItemsRendered = ({ visibleStartIndex, visibleStopIndex }) => {
+    setPosition({
+      start: visibleStartIndex,
+      end: visibleStopIndex,
+    });
+  };
+
   return (
     <div className="snapshot-list">
       <List
@@ -16,6 +85,8 @@ function SnapshotList({ snapshots, isVisible, fields}) {
         width={200}
         itemKey={SnapshotKey}
         itemData={snapshots}
+        onItemsRendered={onItemsRendered}
+        ref={listRef}
       >
         {({ index, style, data}) =>
           <SnapshotItem
@@ -29,6 +100,45 @@ function SnapshotList({ snapshots, isVisible, fields}) {
       </List>
     </div>
   );
+}, areSnapshotListEqual);
+
+function SnapshotListWrapper({ snapshots, fields, isVisible }) {
+  const listRef = useRef(null);
+
+  const [position, setPosition] = useState({
+    start:  0,
+    end: snapshots.length,
+  });
+
+  const { start, end } = position;
+
+  const handlePrev = useCallback(() => {
+    listRef.current.scrollToItem(start - 1);
+  }, [start]);
+
+  const handleNext = useCallback(() => {
+    listRef.current.scrollToItem(end + 1);
+  }, [end]);
+
+  return (
+    <Fragment>
+      <ListPrevButton
+        isVisible={start > 0}
+        handler={handlePrev}
+      />
+      <SnapshotList
+        snapshots={snapshots}
+        fields={fields}
+        isVisible={isVisible}
+        setPosition={setPosition}
+        listRef={listRef}
+      />
+      <ListNextButton
+        isVisible={end < snapshots.length - 1}
+        handler={handleNext}
+      />
+    </Fragment>
+  );
 }
 
-export default SnapshotList;
+export default SnapshotListWrapper;
