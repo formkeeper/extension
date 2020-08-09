@@ -65,8 +65,11 @@ const SnapshotList = memo(({
   setPosition,
   listRef
 }) => {
+  const all = snapshots.current;
+  const len = all.length;
+
   useEffect(() => {
-    listRef.current.scrollToItem(snapshots.length - 1);
+    listRef.current.scrollToItem(len - 1);
   });
 
   const onItemsRendered = ({ visibleStartIndex, visibleStopIndex }) => {
@@ -80,11 +83,11 @@ const SnapshotList = memo(({
     <div className="snapshot-list">
       <List
         height={600}
-        itemCount={snapshots.length}
+        itemCount={len}
         itemSize={50}
         width={200}
         itemKey={SnapshotKey}
-        itemData={snapshots}
+        itemData={all}
         onItemsRendered={onItemsRendered}
         ref={listRef}
       >
@@ -103,11 +106,14 @@ const SnapshotList = memo(({
 }, areSnapshotListEqual);
 
 function SnapshotListWrapper({ snapshots, fields, isVisible }) {
+  const all = snapshots.current;
+  const len = all.length;
+
   const listRef = useRef(null);
 
   const [position, setPosition] = useState({
     start:  0,
-    end: snapshots.length,
+    end: len,
   });
 
   const { start, end } = position;
@@ -134,7 +140,7 @@ function SnapshotListWrapper({ snapshots, fields, isVisible }) {
         listRef={listRef}
       />
       <ListNextButton
-        isVisible={end < snapshots.length - 1}
+        isVisible={end < len - 1}
         handler={handleNext}
       />
     </Fragment>

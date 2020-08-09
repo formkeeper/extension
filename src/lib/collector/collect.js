@@ -40,7 +40,10 @@ async function retrieveAndCollect(storage, parent) {
       active: {},
       missing: [],
     },
-    snapshots: [],
+    snapshots: {
+      id: null,
+      current: [],
+    },
     warns: [],
   };
   // Old fields pending to reconciliate
@@ -49,7 +52,10 @@ async function retrieveAndCollect(storage, parent) {
       active: {},
       missing: [],
     },
-    snapshots: [],
+    snapshots: {
+      id: null,
+      current: [],
+    },
     ...prevState,
   };
 

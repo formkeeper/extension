@@ -57,5 +57,8 @@
       }
     ]
   },
-  "snapshots": []
+  "snapshots": {
+    "id": null,
+    "current": []
+  }
 }
