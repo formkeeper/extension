@@ -20,8 +20,9 @@ export function cacheLinkedFieldElement(fieldHash, element) {
   };
 }
 
-export function addSnapshot(fieldHash, content) {
+export function addSnapshot(fieldHash, content, ts) {
   return {
+    ts,
     type: ActionTypes.ADD_SNAPSHOT,
     entry: {
       [fieldHash]: content,
@@ -41,11 +42,12 @@ export function addSnapshotSuccess(snapshots) {
 export function persistAndAddSnapshot(storage, fieldHash, content) {
   return dispatch => {
     storage.get().then(result => {
+      const now = Date.now();
       const state = result || initialState;
 
       // Add the snapshot
       const newState = rootReducer(
-        state, addSnapshot(fieldHash, content),
+        state, addSnapshot(fieldHash, content, now),
       );
       // Extract only the parts we want to be stored in the storage
       const { fields, snapshots } = newState;

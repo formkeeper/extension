@@ -51,7 +51,7 @@ function snapshotsReducer(snapshots, action) {
     return [
       ...snapshots,
       {
-        time: { ts: Date.now() },
+        time: { ts: action.ts },
         contents: {
           ...lastContents,
           ...action.entry,
