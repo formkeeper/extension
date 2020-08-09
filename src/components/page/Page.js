@@ -1,7 +1,7 @@
 import React from "react";
 
 import Sidebar from "../sidebar/Sidebar";
-import FieldBarWrapper from "../field/FieldBarWrapper";
+import VirtualFieldList from "../field/VirtualFieldList";
 
 import useExtensionLocation from "../../hooks/useExtensionLocation";
 import useCollector from "../../hooks/useCollector";
@@ -27,7 +27,7 @@ function Page({ window, fields, snapshots }) {
     <div id="sidebar-wrapper">
       <StorageDispatch.Provider value={storage}>
         <Sidebar snapshots={snapshots} fields={fields}/>
-        <FieldBarWrapper fields={fields}/>
+        <VirtualFieldList fields={fields}/>
       </StorageDispatch.Provider>
     </div>
   );
