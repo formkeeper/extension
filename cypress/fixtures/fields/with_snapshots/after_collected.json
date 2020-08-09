@@ -58,28 +58,31 @@
       }
     ]
   },
-  "snapshots": [
-    {
-      "time": { "ts": 1593709449000 },
-      "contents": {
-        "72218321173abf46b0c0282d4c53cb9ba721ff5a949212e228b5c11a552b1b6d": "This is the field one",
-        "a690624fa86d3e42b1365914b3c22f867123474eabe57993896731da331d752e": "This is the field two",
-        "1e7821ffb7836b652e1c9fcfff9c1193ca8efa1f772e5eb89e41276bebca0909": "Snapshot of old missing element!"
+  "snapshots": {
+    "id": "5095cd47ca5b9b927bab544ee9ec4af75f91af951600ea637a11e7a22caf8869",
+    "current": [
+      {
+        "time": { "ts": 1593709449000 },
+        "contents": {
+          "72218321173abf46b0c0282d4c53cb9ba721ff5a949212e228b5c11a552b1b6d": "This is the field one",
+          "a690624fa86d3e42b1365914b3c22f867123474eabe57993896731da331d752e": "This is the field two",
+          "1e7821ffb7836b652e1c9fcfff9c1193ca8efa1f772e5eb89e41276bebca0909": "Snapshot of old missing element!"
+        }
+      },
+      {
+        "time": { "ts": 1593709451000 },
+        "contents": {
+          "72218321173abf46b0c0282d4c53cb9ba721ff5a949212e228b5c11a552b1b6d": "This is the field one changing",
+          "a690624fa86d3e42b1365914b3c22f867123474eabe57993896731da331d752e": "This is the field two"
+        }
+      },
+      {
+        "time": { "ts": 1593709501000 },
+        "contents": {
+          "72218321173abf46b0c0282d4c53cb9ba721ff5a949212e228b5c11a552b1b6d": "This is the field one changing",
+          "a690624fa86d3e42b1365914b3c22f867123474eabe57993896731da331d752e": "Now is two, the one that changes"
+        }
       }
-    },
-    {
-      "time": { "ts": 1593709451000 },
-      "contents": {
-        "72218321173abf46b0c0282d4c53cb9ba721ff5a949212e228b5c11a552b1b6d": "This is the field one changing",
-        "a690624fa86d3e42b1365914b3c22f867123474eabe57993896731da331d752e": "This is the field two"
-      }
-    },
-    {
-      "time": { "ts": 1593709501000 },
-      "contents": {
-        "72218321173abf46b0c0282d4c53cb9ba721ff5a949212e228b5c11a552b1b6d": "This is the field one changing",
-        "a690624fa86d3e42b1365914b3c22f867123474eabe57993896731da331d752e": "Now is two, the one that changes"
-      }
-    }
-  ]
+    ]
+  }
 }

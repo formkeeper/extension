@@ -1,6 +1,7 @@
 import retrieveAndCollect from "../lib/collector";
 import { ActionTypes } from "./types";
 import rootReducer, { initialState } from "../reducers";
+import { getSnapshotsListID } from "../lib/snapshot/id";
 
 export function retrieveStateSuccess(fields, snapshots) {
   return {
@@ -20,8 +21,9 @@ export function cacheLinkedFieldElement(fieldHash, element) {
   };
 }
 
-export function addSnapshot(fieldHash, content) {
+export function addSnapshot(fieldHash, content, ts) {
   return {
+    ts,
     type: ActionTypes.ADD_SNAPSHOT,
     entry: {
       [fieldHash]: content,
@@ -41,61 +43,34 @@ export function addSnapshotSuccess(snapshots) {
 export function persistAndAddSnapshot(storage, fieldHash, content) {
   return dispatch => {
     storage.get().then(result => {
+      const now = Date.now();
       const state = result || initialState;
 
       // Add the snapshot
       const newState = rootReducer(
-        state, addSnapshot(fieldHash, content),
+        state, addSnapshot(fieldHash, content, now),
       );
       // Extract only the parts we want to be stored in the storage
       const { fields, snapshots } = newState;
 
-      storage.save({
-        fields,
-        snapshots,
-      }).then(result => {
-        if (!result) {
-          throw new Error("addSnapshot: Error while trying to save snapshot");
-        }
-        dispatch(
-          addSnapshotSuccess(snapshots)
-        );
+      getSnapshotsListID(snapshots.current).then(hash => {
+        snapshots.id = hash;
+        storage.save({
+          fields,
+          snapshots,
+        }).then(result => {
+          if (!result) {
+            throw new Error("addSnapshot: Error while trying to save snapshot");
+          }
+          dispatch(
+            addSnapshotSuccess(snapshots)
+          );
+        });
       });
+
     });
   };
 }
-
-/**
- * addSnapshots returns a thunk that computes the SHA256 of the snapshot's
- * content and attempts to persist it to a storage layer. If successful
- * addSnapshotSuccess will be dispatched.
- *
- * @async
- * @param {String} contents
- */
-/*
-export function addSnapshot(fieldHash, contents) {
-  return function(dispatch) {
-    SHA256(contents).then(contentsHash => {
-      const ts = Date.now();
-      const snapshot = {
-        time: { ts },
-        hash: contentsHash,
-        contents,
-      };
-
-      new ChromeStorage().addSnapshot(fieldHash, snapshot).then(store => {
-        if (!store) {
-          throw new Error("addSnapshot: Error while trying to save snapshot");
-        }
-        dispatch(
-          addSnapshotSuccess(fieldHash, snapshot)
-        );
-      });
-    });
-  };
-}
-*/
 
 /**
  * retrieveAndCollectFields triggers an async action.

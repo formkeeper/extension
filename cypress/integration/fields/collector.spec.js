@@ -135,6 +135,10 @@ context("Fields", () => {
                 .to.deep.equal(collected.fields.active);
               expect(results.fields.missing)
                 .to.deep.equal(collected.fields.missing);
+              expect(results.snapshots.id)
+                .to.deep.equal(collected.snapshots.id);
+              expect(results.snapshots.current)
+                .to.deep.equal(collected.snapshots.current);
             });
           });
 

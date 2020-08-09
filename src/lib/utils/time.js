@@ -97,28 +97,28 @@ class TimeFormatter {
   getPrettyString(compareDate) {
     const diff = this.getDiff(compareDate || new Date());
 
-    if (1 < diff.days && diff.days < 2) {
+    if (1 <= diff.days && diff.days < 2) {
       return i18n.get(i18n.vars.yesterday);
 
-    } else if (1 < diff.hours && diff.hours < 24) {
+    } else if (1 <= diff.hours && diff.hours < 24) {
       if (diff.hours < 2) {
         return i18n.get(i18n.vars.one_hour_ago);
       }
       return i18n.get(i18n.vars.hours_ago, prettify(diff.hours));
 
-    } else if (1 < diff.mins && diff.mins < 60) {
+    } else if (1 <= diff.mins && diff.mins < 60) {
       if (diff.mins < 2) {
         return i18n.get(i18n.vars.one_min_ago);
       }
       return i18n.get(i18n.vars.mins_ago, prettify(diff.mins));
 
-    } else if (1 < diff.secs && diff.secs < 60) {
+    } else if (1 <= diff.secs && diff.secs < 60) {
       if (diff.secs < 2) {
         return i18n.get(i18n.vars.one_sec_ago);
       }
       return i18n.get(i18n.vars.secs_ago, prettify(diff.secs));
 
-    } else if (0 < diff.ms && diff.ms < 1000) {
+    } else if (0 <= diff.ms && diff.ms < 1000) {
       return i18n.get(i18n.vars.just_now);
 
     } else {

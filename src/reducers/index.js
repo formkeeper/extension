@@ -5,13 +5,15 @@ export const initialState = {
     active: {},
     missing: [],
   },
-  snapshots: [],
+  snapshots: {
+    id: null,
+    current: [],
+  },
   isCollected: false,
 };
 
 export const initialField = {
   selector: null,
-  snapshots: [],
 };
 
 function activeFieldReducer(field = initialField, action) {
@@ -42,22 +44,26 @@ function fieldsReducer(fields, action) {
 }
 
 function snapshotsReducer(snapshots, action) {
+  const all = snapshots.current;
   switch (action.type) {
   case ActionTypes.ADD_SNAPSHOT:
     const lastContents =
-      snapshots.length === 0
+      all.length === 0
         ? {}
-        : snapshots[snapshots.length-1].contents;
-    return [
-      ...snapshots,
-      {
-        time: { ts: Date.now() },
-        contents: {
-          ...lastContents,
-          ...action.entry,
+        : all[all.length-1].contents;
+    return {
+      id: null,
+      current: [
+        ...all,
+        {
+          time: { ts: action.ts },
+          contents: {
+            ...lastContents,
+            ...action.entry,
+          }
         }
-      }
-    ];
+      ]
+    };
   default:
   }
 }

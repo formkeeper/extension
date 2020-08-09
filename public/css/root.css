@@ -22,3 +22,17 @@ body {
     height: 100%;
     border: none;
 }
+
+.pulse {
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
+    animation: 250ms pulse linear;
+}
+
+@keyframes pulse {
+    0.0%{
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
+    }
+    100%{
+        box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+    }
+}

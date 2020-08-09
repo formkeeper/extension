@@ -49,8 +49,9 @@
     },
     "missing": []
   },
-  "snapshots": []
+  "snapshots": {
+    "id": null,
+    "current": []
+  }
 }
-
-
 

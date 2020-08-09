@@ -2,11 +2,11 @@ import React from "react";
 
 import { useRef, useEffect, useContext } from "react";
 import { debounce } from "../../lib/utils/helpers";
-import { SAVE_AFTER_TIME } from "../../global/constants";
+import { DEFAULT_SAVE_AFTER_TIME } from "../../global/constants";
 import { FieldsDispatch, StorageDispatch } from "../../global/context";
 import { persistAndAddSnapshot } from "../../actions";
 
-import { getFieldContent } from "./helpers";
+import { getFieldValue } from "../../lib/field";
 
 function FieldBar({ field, fieldHash }) {
   const { el, selector } = field;
@@ -16,12 +16,12 @@ function FieldBar({ field, fieldHash }) {
   const fieldElem = useRef(el);
   useEffect(() => {
     function handleInput(e) {
-      const content = getFieldContent(e.target);
+      const content = getFieldValue(e.target);
       dispatch(
         persistAndAddSnapshot(storage, fieldHash, content)
       );
     }
-    const debouncedInput = debounce(handleInput, SAVE_AFTER_TIME);
+    const debouncedInput = debounce(handleInput, DEFAULT_SAVE_AFTER_TIME);
 
     if (!fieldElem.current) {
       console.warn("FieldBar: Element not cached, querying using " +
