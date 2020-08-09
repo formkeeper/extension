@@ -10,13 +10,8 @@ import useExtensionVisibility from "./hooks/useExtensionVisibility";
 
 import Page from "./components/page/Page";
 
-/**
+/*
   App is the main component.
-
-  The extension behaviour depends on the context, e.g. whenever a new page is
-  visited (including SPAand server side pages) or a field (textarea, div with
-  contenteditable, inputs...) is focused, this component (and the whole
-  extension, consequently) will be re-rendered.
 */
 export function App() {
   const isVisible = useExtensionVisibility();
