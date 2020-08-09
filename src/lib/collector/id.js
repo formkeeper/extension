@@ -1,4 +1,4 @@
-import SHA256 from "./hash";
+import SHA256 from "../utils/hash";
 
 class ID {
   constructor(document) {

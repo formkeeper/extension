@@ -1,5 +1,4 @@
 import { ActionTypes } from "../actions/types";
-import { getSnapshotsListID } from "../lib/snapshot";
 
 export const initialState = {
   fields: {
@@ -53,7 +52,7 @@ function snapshotsReducer(snapshots, action) {
         ? {}
         : all[all.length-1].contents;
     return {
-      id: getSnapshotsListID(all),
+      id: null,
       current: [
         ...all,
         {

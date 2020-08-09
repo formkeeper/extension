@@ -33,6 +33,8 @@ async function runUnitTests(mode) {
   // print all test results
   argv.push("--verbose");
 
+  argv.push("--env=./test/env.js");
+
   if (mode === modes.UNIT && !isCI) {
     argv.push("--watch");
   } else {

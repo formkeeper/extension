@@ -1,6 +1,7 @@
 import retrieveAndCollect from "../lib/collector";
 import { ActionTypes } from "./types";
 import rootReducer, { initialState } from "../reducers";
+import { getSnapshotsListID } from "../lib/snapshot/id";
 
 export function retrieveStateSuccess(fields, snapshots) {
   return {
@@ -52,17 +53,21 @@ export function persistAndAddSnapshot(storage, fieldHash, content) {
       // Extract only the parts we want to be stored in the storage
       const { fields, snapshots } = newState;
 
-      storage.save({
-        fields,
-        snapshots,
-      }).then(result => {
-        if (!result) {
-          throw new Error("addSnapshot: Error while trying to save snapshot");
-        }
-        dispatch(
-          addSnapshotSuccess(snapshots)
-        );
+      getSnapshotsListID(snapshots.current).then(hash => {
+        snapshots.id = hash;
+        storage.save({
+          fields,
+          snapshots,
+        }).then(result => {
+          if (!result) {
+            throw new Error("addSnapshot: Error while trying to save snapshot");
+          }
+          dispatch(
+            addSnapshotSuccess(snapshots)
+          );
+        });
       });
+
     });
   };
 }

@@ -1,3 +1,13 @@
+/*
+ * Legacy file. This test is working and was useful when there was no UI but
+ * please don't write more Component tests with jest, use cypress integration
+ * tests instead.
+ *
+ * Given the complexity of testing components of a chrome extension it isn't
+ * worth it to unit test components with jest. Use jest for all unit tests
+ * (e.g. a time formatter, hasher, etc.) except when testing components.
+ */
+
 import * as React from "react";
 import { configure, mount } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
