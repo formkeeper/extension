@@ -84,7 +84,7 @@ const SnapshotList = memo(({
       <List
         height={600}
         itemCount={len}
-        itemSize={50}
+        itemSize={40}
         width={200}
         itemKey={SnapshotKey}
         itemData={all}

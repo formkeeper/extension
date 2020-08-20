@@ -43,7 +43,14 @@ function SnapshotItem({ index, style, data, fields, isVisible}) {
 
   return (
     <div className="snapshot" style={style} onClick={handleClick}>
-      <h3>{time}</h3>
+      <span className="timemark"></span>
+      <span className="timemark"></span>
+      <span className="timemark"></span>
+      <span className="timemark"></span>
+      <div className="time">
+        <span className="big-timemark"></span>
+        <div className="timestamp">{time}</div>
+      </div>
     </div>
   );
 }
