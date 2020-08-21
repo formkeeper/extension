@@ -57,6 +57,10 @@ const ListNextButton = memo(({ handler, isVisible }) => {
   );
 });
 
+const listStyle = {
+  position: "initial",
+  willChange: "auto",
+};
 
 const SnapshotList = memo(({
   snapshots,
@@ -84,12 +88,13 @@ const SnapshotList = memo(({
       <List
         height={600}
         itemCount={len}
-        itemSize={40}
-        width={200}
+        itemSize={44}
+        width={40}
         itemKey={SnapshotKey}
         itemData={all}
         onItemsRendered={onItemsRendered}
         ref={listRef}
+        style={listStyle}
       >
         {({ index, style, data}) =>
           <SnapshotItem

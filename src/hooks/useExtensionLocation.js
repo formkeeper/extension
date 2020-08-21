@@ -9,10 +9,10 @@ function useExtensionLocation(win = window) {
       setLocation(req.url);
     }
 
+    const eventToHandler = {
+      "on_url_updated": handleUrlUpdated,
+    };
     function onMessage(req, sender, sendResponse) {
-      const eventToHandler = {
-        "on_url_updated": handleUrlUpdated,
-      };
       const handler = eventToHandler[req.type];
       if (handler) {
         handler.call(this, req, sender, sendResponse);

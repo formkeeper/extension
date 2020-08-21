@@ -1,0 +1,35 @@
+.ext-wrapper .close {
+  width: 25px;
+  height: 25px;
+  background: #333;
+  border-radius: 50%;
+  position: relative;
+  text-align: center;
+  line-height: 1.38em;
+  margin: 20px 14px 0;
+  cursor: pointer;
+  transform: rotate(0) scale(1);
+  transition: transform 150ms ease-out;
+}
+
+.ext-wrapper .close:hover {
+  transform: rotate(360deg) scale(1.4);
+}
+
+.ext-wrapper .close::before, .ext-wrapper .close::after {
+  content: '';
+  width: 15px;
+  background: white;
+  height: 1px;
+  position: absolute;
+  top: 48%;
+  left: 20%;
+}
+
+.ext-wrapper .close::before {
+  transform: rotate(45deg);
+}
+
+.ext-wrapper .close::after {
+  transform: rotate(-45deg);
+}

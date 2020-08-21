@@ -9,10 +9,10 @@ function useExtensionVisibility() {
       setVisible(!isVisible);
     }
 
+    const eventToHandler = {
+      "on_badge_click": handleBadgeClicked,
+    };
     function onMessage(req, sender, sendResponse) {
-      const eventToHandler = {
-        "on_badge_click": handleBadgeClicked,
-      };
       const handler = eventToHandler[req.type];
       if (handler) {
         handler.call(this, req, sender, sendResponse);
@@ -25,7 +25,7 @@ function useExtensionVisibility() {
     };
   });
 
-  return isVisible;
+  return [isVisible, setVisible];
 }
 
 export default useExtensionVisibility;

@@ -11,7 +11,7 @@ function changeLinkedElement(fields, snapshot, fieldState) {
     const field = fields[fieldState][fieldHash];
     const content = contents[fieldHash];
     setFieldValue(field, content);
-    animate(field, "pulse", 300);
+    animate(field, "field-pulse", 300);
   }
 }
 

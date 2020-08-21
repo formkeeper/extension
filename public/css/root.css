@@ -1,23 +1,15 @@
-/*
-    Unlike each component's css in 'src/' this css is not isolated from the web page.
-*/
-
-* {
+.ext-wrapper * {
     margin: 0;
     box-sizing: border-box;
 }
 
-body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-
 .ext-wrapper {
-    width: auto;
     height: 100%;
     position: fixed;
     top: 0px;
     left: 0px;
-    z-index: 999999;
+    z-index: 999998;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 .ext-wrapper iframe {
@@ -26,12 +18,12 @@ body {
     border: none;
 }
 
-.pulse {
+.field-pulse {
     box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
-    animation: 250ms pulse linear;
+    animation: 250ms field-pulse linear;
 }
 
-@keyframes pulse {
+@keyframes field-pulse {
     0.0%{
         box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
     }
